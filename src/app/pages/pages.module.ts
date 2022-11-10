@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { RouterModule } from '@angular/router';
-
-
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @NgModule({
-  declarations: [PagesComponent],
+  declarations: [
+    PagesComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

@@ -4,10 +4,14 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PagesComponent } from './pages/pages.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NewShiftComponent } from './components/new-shift/new-shift.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NewShiftComponent
   ],
   imports: [
     BrowserModule,
