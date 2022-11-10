@@ -1,0 +1,16 @@
+main {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 0 40px;
+    img {
+        margin-bottom: 100px;
+    }
+    form {
+        button {
+            margin-top: 75px;
+        }
+    }
+}

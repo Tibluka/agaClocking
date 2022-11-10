@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { PagesComponent } from './pages/pages.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,20 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot([
+      {
+        path: '', component: AppComponent,
+        children: [
+          {
+            path: '', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+          },
+          {
+            path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+          }
+        ]
+      }
+    ]),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

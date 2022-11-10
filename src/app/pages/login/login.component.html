@@ -1,0 +1,18 @@
+<main>
+
+    <div class="text-center w-100">
+        <img src="../../../assets/logo/logo.svg" alt="" class="text-center">
+    </div>
+    <form [formGroup]="userForm" (ngSubmit)="login()">
+        <div class="form-group mb-4">
+            <label for="username">Login</label>
+            <input type="text" class="form-control" formControlName="username">
+        </div>
+        <div class="form-group mb-4">
+            <label for="password">Senha</label>
+            <input type="text" class="form-control" formControlName="password">
+        </div>
+
+        <button type="submit" class="primary-btn w-100">Entrar</button>
+    </form>
+</main>

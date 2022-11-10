@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+:root {
+    --primary: #8081bb;
+    --gradient: linear-gradient(
+        270deg,
+        #6b6c99 4.07%,
+        #8081bb 48.62%,
+        rgba(111, 111, 136, 0.29) 93.16%,
+        rgba(101, 101, 102, 0.29) 93.16%
+    );
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    @media (max-width: 1080px) {
+        font-size: 93.75%;
+    }
+
+    @media (max-width: 720px) {
+        font-size: 87.5%;
+    }
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+body,
+input,
+textarea,
+label,
+button {
+    font-family: "Encode Sans", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+    font-weight: 600;
+}
+
+[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.c-p {
+    cursor: pointer;
+}
+
+.primary-btn {
+    border-radius: 50px;
+    height: 42px;
+    background: var(--gradient);
+    border: none;
+    color: white;
+}
+
+.form-group {
+    input {
+        height: 39.3px !important;
+    }
+}
