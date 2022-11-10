@@ -20,11 +20,12 @@ import { NewShiftComponent } from './components/new-shift/new-shift.component';
         path: '', component: AppComponent,
         children: [
           {
-            path: '', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+            path: '', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
           },
           {
-            path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+            path: '', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
           }
+          
         ]
       }
     ]),
