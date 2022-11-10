@@ -71,6 +71,19 @@ strong {
     color: white;
 }
 
+.secondary-btn {
+    border-radius: 50px;
+    height: 42px;
+    background: var(--gray-light);
+    border: 1px solid var(--gradient);
+    color: var(--primary);
+    outline: 0;
+    &:focus{
+        outline: 0;
+    }
+}
+
+
 .form-group {
     input {
         height: 39.3px !important;

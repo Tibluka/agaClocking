@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
   }
 
   newShift() {
-    const modal = this.modal.open(NewShiftComponent, { size: 'md', centered: true });
+    const modal = this.modal.open(NewShiftComponent, { size: 'sm', centered: true });
   }
 
 }
