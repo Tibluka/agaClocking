@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-new-shift',
@@ -9,6 +10,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewShiftComponent implements OnInit {
 
+  hour = 0;
+  minute = 0;
   today: Date = new Date();
   shiftForm: FormGroup = new FormGroup({
     startShift: new FormControl(0),
@@ -24,7 +27,7 @@ export class NewShiftComponent implements OnInit {
     return hours;
   }
 
-  get minutes(){
+  get minutes() {
     let minutes = new Array(60);
     for (let index = 0; index < minutes.length; index++) {
       minutes[index] = index;
@@ -32,7 +35,9 @@ export class NewShiftComponent implements OnInit {
     return minutes;
   }
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal) {
+    this.shiftForm.get('startShift').setValue(moment(new Date()).format('YYYY/MM/DDTHH:mm:SS'))
+  }
 
   ngOnInit(): void {
   }
@@ -43,6 +48,13 @@ export class NewShiftComponent implements OnInit {
 
   addShift() {
     this.activeModal.close();
+  }
+
+  changeHour() {
+    this.shiftForm.get('startShift').setValue(moment().set('hours', Number(this.hour)).format('YYYY-MM-DDTHH:mm:SS'));
+  }
+  changeMinute() {
+    this.shiftForm.get('startShift').setValue(moment().set('minutes', Number(this.minute)).format('YYYY-MM-DDTHH:mm:SS'));
   }
 
 }
