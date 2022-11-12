@@ -12,16 +12,7 @@
 
     <div class="body" *ngIf="shifts.length > 0; else noShifts">
         <div class="shifts" (click)="terminateShift(shift)" *ngFor="let shift of shifts">
-            <div class="shift">
-                <div class="d-flex align-items-center">
-                    <img *ngIf="shift.finished" src="../../../assets/icons/shift-finished-icon.svg" alt="">
-                    <img *ngIf="!shift.finished" src="../../../assets/icons/shift-initiated-icon.svg" alt="">
-                    <span class="d-block ms-2">{{shift.project}}</span>
-                </div>
-                <span>{{shift.startShift | date: 'HH:mm'}} <span *ngIf="shift.finished">às</span> {{ shift.endShift |
-                    date: 'HH:mm'}}</span>
-                <span>{{calculateDifference(shift)}}</span>
-            </div>
+            <app-shift-item [shift]="shift"></app-shift-item>
         </div>
     </div>
     <ng-template #noShifts>

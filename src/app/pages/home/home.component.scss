@@ -17,16 +17,4 @@ main {
 
 .body {
     margin-top: 40px;
-    .shifts {
-        .shift {
-            height: 64px;
-            padding: 20px 28px;
-            border-top: 1px solid var(--borders);
-            border-bottom: 1px solid var(--borders);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    }
 }

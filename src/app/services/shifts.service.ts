@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
-import { Shifts } from '../models/shifts';
+import { Shift, Shifts } from '../models/shifts';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,11 @@ export class ShiftsService {
 
   async terminateShift(body) {
     await this.http.post(`${environment.url}/terminate-shift`, body).toPromise();
+    this.listShifts();
+  }
+
+  async deleteShift(shift: Shift) {
+    await this.http.post(`${environment.url}/delete-shift`, { shiftId: shift._id.$oid }).toPromise();
     this.listShifts();
   }
 
