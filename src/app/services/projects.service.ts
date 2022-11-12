@@ -11,7 +11,7 @@ export class ProjectsService {
   private projectsData: Projects = new Projects();
 
   get projects() {
-    return this.projectsData;
+    return this.projectsData.projects;
   }
 
   constructor(private http: HttpClient) { }
