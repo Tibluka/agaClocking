@@ -6,11 +6,11 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
 @Component({
-  selector: 'app-terminate-shift',
-  templateUrl: './terminate-shift.component.html',
-  styleUrls: ['./terminate-shift.component.scss']
+  selector: 'app-update-shift',
+  templateUrl: './update-shift.component.html',
+  styleUrls: ['./update-shift.component.scss']
 })
-export class TerminateShiftComponent implements OnInit {
+export class UpdateShiftComponent implements OnInit {
 
 
   hour = 0;
@@ -51,8 +51,11 @@ export class TerminateShiftComponent implements OnInit {
     this.activeModal.close();
   }
 
-  async terminateShift() {
+  async updateShift() {
     if (this.shiftForm.valid) {
+      if(this.shiftForm){
+
+      }
       await this.shiftsService.terminateShift(this.shiftForm.value);
       this.activeModal.close();
     }

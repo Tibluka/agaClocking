@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { TerminateShiftComponent } from 'src/app/components/terminate-shift/terminate-shift.component';
+import { UpdateShiftComponent } from 'src/app/components/update-shift/update-shift.component';
 import { Shift } from 'src/app/models/shifts';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
   }
 
   terminateShift(shift: Shift) {
-    const modal = this.ngbModal.open(TerminateShiftComponent, { size: 'md', centered: true });
+    const modal = this.ngbModal.open(UpdateShiftComponent, { size: 'md', centered: true });
     modal.componentInstance.shiftForm = new FormGroup({
       endShift: new FormControl(moment(this.shiftDate).format('YYYY-MM-DDTHH:mm:ss')),
       shiftId: new FormControl(shift._id.$oid)
