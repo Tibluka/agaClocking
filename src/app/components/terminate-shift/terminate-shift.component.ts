@@ -1,31 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
 @Component({
-  selector: 'app-new-shift',
-  templateUrl: './new-shift.component.html',
-  styleUrls: ['./new-shift.component.scss']
+  selector: 'app-terminate-shift',
+  templateUrl: './terminate-shift.component.html',
+  styleUrls: ['./terminate-shift.component.scss']
 })
-export class NewShiftComponent implements OnInit {
+export class TerminateShiftComponent implements OnInit {
+
 
   hour = 0;
   minute = 0;
   today: Date = new Date();
   shiftForm: FormGroup = new FormGroup({
-    startShift: new FormControl(0),
-    activity: new FormControl(''),
-    project: new FormControl(''),
     endShift: new FormControl(null),
-    finished: new FormControl(false),
-    userId: new FormControl('')
+    shiftId: new FormControl('')
   });
 
-  get projects() {
-    return this.projectsService.projects;
+  get shiftDate() {
+    return this.shiftsService.date;
   }
 
   get hours() {
@@ -45,10 +42,7 @@ export class NewShiftComponent implements OnInit {
   }
 
   constructor(private activeModal: NgbActiveModal,
-    private shiftsService: ShiftsService,
-    private projectsService: ProjectsService) {
-    this.projectsService.listProjects();
-  }
+    private shiftsService: ShiftsService) { }
 
   ngOnInit(): void {
   }
@@ -57,18 +51,18 @@ export class NewShiftComponent implements OnInit {
     this.activeModal.close();
   }
 
-  async addShift() {
+  async terminateShift() {
     if (this.shiftForm.valid) {
-      await this.shiftsService.addNewShift(this.shiftForm.value);
+      await this.shiftsService.terminateShift(this.shiftForm.value);
       this.activeModal.close();
     }
   }
 
   changeHour() {
-    this.shiftForm.get('startShift').setValue(moment().set('hours', Number(this.hour)).format('YYYY-MM-DDTHH:mm:ss'));
-  }
-  changeMinute() {
-    this.shiftForm.get('startShift').setValue(moment().set('minutes', Number(this.minute)).format('YYYY-MM-DDTHH:mm:ss'));
+    this.shiftForm.get('endShift').setValue(moment().set('hours', Number(this.hour)).format('YYYY-MM-DDTHH:mm:ss'));
   }
 
+  changeMinute() {
+    this.shiftForm.get('endShift').setValue(moment().set('minutes', Number(this.minute)).format('YYYY-MM-DDTHH:mm:ss'));
+  }
 }

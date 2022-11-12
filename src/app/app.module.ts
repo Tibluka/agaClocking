@@ -9,11 +9,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NewShiftComponent } from './components/new-shift/new-shift.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TerminateShiftComponent } from './components/terminate-shift/terminate-shift.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewShiftComponent
+    NewShiftComponent,
+    TerminateShiftComponent
   ],
   imports: [
     BrowserModule,

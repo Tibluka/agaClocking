@@ -2,19 +2,20 @@
     <div style="height: 102px;"></div>
 
     <div class="date-time d-flex align-items-center justify-content-between">
-        <img src="../../../assets/icons/left-arrow-icon.svg" alt="">
+        <img (click)="previousShiftDate()" src="../../../assets/icons/left-arrow-icon.svg" alt="">
         <div class="d-flex flex-column align-items-center">
-            <div>Hoje</div>
-            <div>{{today | date: 'dd/MM/yyyy'}}</div>
+            <div *ngIf="isToday()">Hoje</div>
+            <div>{{shiftDate | date: 'dd/MM/yyyy'}}</div>
         </div>
-        <img src="../../../assets/icons/right-arrow-icon.svg" alt="">
+        <img (click)="nextShiftDate()" src="../../../assets/icons/right-arrow-icon.svg" alt="">
     </div>
 
     <div class="body" *ngIf="shifts.length > 0; else noShifts">
-        <div class="shifts" *ngFor="let shift of shifts">
+        <div class="shifts" (click)="terminateShift(shift)" *ngFor="let shift of shifts">
             <div class="shift">
                 <span>{{shift.project}}</span>
-                <span>{{shift.startShift | date: 'HH:mm'}} {{shift.endShift !== '' ?  'às ' + shift.endShift : '- iniciado'}}</span>
+                <span>{{shift.startShift | date: 'HH:mm'}} <span *ngIf="shift.finished">às</span> {{ shift.endShift |
+                    date: 'HH:mm'}}</span>
                 <span>{{calculateDifference(shift)}}</span>
             </div>
         </div>

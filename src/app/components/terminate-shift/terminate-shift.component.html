@@ -1,16 +1,12 @@
 <div class="modal-header d-flex justify-content-between">
-    Registrar <span class="d-block">{{today | date: 'dd/MM/yyyy'}}</span>
+    Finalizar turno <span class="d-block">{{shiftDate | date: 'dd/MM/yyyy'}}</span>
 </div>
 
 <div class="modal-body">
-    <form [formGroup]="shiftForm" (ngSubmit)="addShift()">
-        <label for="project">Projeto</label>
-        <select class="form-select mt-2" formControlName="project">
-            <option *ngFor="let project of projects" [value]="project.projectName">{{project.projectName}}</option>
-        </select>
+    <form [formGroup]="shiftForm" (ngSubmit)="terminateShift()">
 
         <div class="d-flex align-items-center mt-5">
-            <label class="text-nowrap me-2">Registrar horário</label>
+            <label class="text-nowrap me-2">Registrar horário de término</label>
 
             <div class="w-100 me-2">
                 <div class="form-group">
@@ -30,14 +26,9 @@
             </div>
         </div>
 
-        <div class="form-group mt-4">
-            <label for="activities">Atividades</label>
-            <textarea class="form-control" formControlName="activity" rows="3"></textarea>
-        </div>
-
         <div class="d-flex flex-column mt-5">
             <button class="secondary-btn w-100" type="button" (click)="cancel()">Cancelar</button>
-            <button class="primary-btn w-100 mt-3">Cadastrar</button>
+            <button class="primary-btn w-100 mt-3">Finalizar</button>
         </div>
     </form>
 

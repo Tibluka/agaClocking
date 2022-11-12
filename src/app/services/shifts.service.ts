@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { Shifts } from '../models/shifts';
 
@@ -9,7 +10,7 @@ import { Shifts } from '../models/shifts';
 export class ShiftsService {
 
   private shiftsData: Shifts = new Shifts();
-  private shiftDate: Date;
+  private shiftDate: Date = new Date();
 
   get date() {
     return this.shiftDate;
@@ -22,11 +23,32 @@ export class ShiftsService {
   constructor(private http: HttpClient) { }
 
   async addNewShift(body) {
-    const shift = await this.http.post(`${environment.url}/initiate-shift`, body).toPromise();
+    await this.http.post(`${environment.url}/initiate-shift`, body).toPromise();
+    this.listShifts();
   }
 
-  async listShifts(date: string) {
+  async terminateShift(body) {
+    await this.http.post(`${environment.url}/terminate-shift`, body).toPromise();
+    this.listShifts();
+  }
+
+  async listShifts() {
+    const date = moment(this.date).format('YYYY-MM-DD');
     this.shiftsData = await this.http.get(`${environment.url}/list-shifts?date=${date}`).toPromise() as any;
+  }
+
+  previousShiftDate() {
+    let date = new Date(this.date);
+    date.setDate(date.getDate() - 1);
+    this.shiftDate = date;
+    this.listShifts();
+  }
+
+  nextShiftDate() {
+    let date = new Date(this.date);
+    date.setDate(date.getDate() + 1);
+    this.shiftDate = date;
+    this.listShifts();
   }
 
 }
