@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import { Shift } from 'src/app/models/shifts';
 import { ShiftsService } from 'src/app/services/shifts.service';
 import { NewShiftComponent } from '../new-shift/new-shift.component';
 
@@ -16,6 +17,10 @@ export class FooterComponent implements OnInit {
     return this.shiftsService.date;
   }
 
+  get shifts() {
+    return this.shiftsService.shifts;
+  }
+
   constructor(private modal: NgbModal,
     private shiftsService: ShiftsService) { }
 
@@ -23,6 +28,11 @@ export class FooterComponent implements OnInit {
   }
 
   newShift() {
+    const pendingShifts = this.shifts.find((shift: Shift) => !shift.finished);
+    if (pendingShifts) {
+      alert('Ainda há um turno em aberto. Finalize para que possa iniciar um novo turno.')
+      return;
+    }
     const user = JSON.parse(localStorage.getItem('user'));
     const modal = this.modal.open(NewShiftComponent, { size: 'sm', centered: true });
     modal.componentInstance.shiftForm = new FormGroup({

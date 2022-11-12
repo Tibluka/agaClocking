@@ -40,14 +40,14 @@ export class HomeComponent implements OnInit {
       var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
       return `${diffHrs}:${diffMins}hr`;
     } else {
-      return 'Em aberto';
+      return 'Aberto';
     }
   }
 
   isToday() {
     let today = new Date(this.today).setHours(0);
     let shiftDate = new Date(this.shiftDate).setHours(0);
-    if (today === shiftDate) {
+    if (new Date(today).getDate() === new Date(shiftDate).getDate()) {
       return true;
     }
     return false;
