@@ -72,14 +72,14 @@ export class HomeComponent implements OnInit {
 
     modal.componentInstance.activity = shift.activity;
 
+    modal.componentInstance.startShiftHour = Number(moment(shift.startShift).format('HH'));
+    modal.componentInstance.startShiftMinute = Number(moment(shift.startShift).format('mm'));
     if (shift.finished === true) {
-      modal.componentInstance.startShiftHour = Number(moment(shift.startShift).format('HH'));
-      modal.componentInstance.startShiftMinute = Number(moment(shift.startShift).format('mm'));
       modal.componentInstance.endShiftHour = Number(moment(shift.endShift).format('HH'));
       modal.componentInstance.endShiftMinute = Number(moment(shift.endShift).format('mm'));
     } else {
-      modal.componentInstance.startShiftHour = Number(moment(shift.startShift).format('HH'));
-      modal.componentInstance.startShiftMinute = Number(moment(shift.startShift).format('mm'));
+      modal.componentInstance.endShiftHour = Number(moment(this.shiftDate).format('HH'));
+      modal.componentInstance.endShiftMinute = Number(moment(this.shiftDate).format('mm'));
     }
 
   }

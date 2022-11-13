@@ -1,6 +1,6 @@
 footer {
-    height: 92px;
-    background: var(--gradient);
+    height: 62px;
+    background: var(--primary);
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -8,4 +8,23 @@ footer {
     justify-content: space-around;
     align-items: center;
     z-index: 2;
+}
+
+.total{
+    position: fixed;
+    width: 100%;
+    bottom: 60px;
+    height: 44px;
+    background-color: var(--gray-light);
+    border: 0.5px solid var(--borders);
+    padding: 0 28px;
+}
+
+
+.add-shift{
+    width: 50px;
+}
+
+.graphics, .calendar{
+    width: 35px;
 }

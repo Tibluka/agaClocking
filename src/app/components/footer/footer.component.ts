@@ -21,6 +21,10 @@ export class FooterComponent implements OnInit {
     return this.shiftsService.shifts;
   }
 
+  get totalHours(){
+    return this.shiftsService.totalHours;
+  }
+
   constructor(private modal: NgbModal,
     private shiftsService: ShiftsService) { }
 

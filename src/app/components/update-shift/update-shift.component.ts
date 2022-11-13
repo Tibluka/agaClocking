@@ -69,7 +69,8 @@ export class UpdateShiftComponent implements OnInit {
     if (shift === 'endShift') {
       shiftHour = this.endShiftHour;
     }else shiftHour = this.startShiftHour;
-    this.shiftForm.get(shift).setValue(moment().set('hours', Number(shiftHour)).format('YYYY-MM-DDTHH:mm:ss'));
+    let sh = moment(this.shiftForm.get(shift).value).set('hours', Number(shiftHour)).format('YYYY-MM-DDTHH:mm:ss');
+    this.shiftForm.get(shift).setValue(sh);
   }
 
   changeMinute(shift: string) {
@@ -77,6 +78,7 @@ export class UpdateShiftComponent implements OnInit {
     if (shift === 'endShift') {
       shiftMinute = this.endShiftMinute;
     }else shiftMinute = this.startShiftMinute;
-    this.shiftForm.get(shift).setValue(moment().set('minutes', Number(shiftMinute)).format('YYYY-MM-DDTHH:mm:ss'));
+    let sm = moment(this.shiftForm.get(shift).value).set('minutes', Number(shiftMinute)).format('YYYY-MM-DDTHH:mm:ss');
+    this.shiftForm.get(shift).setValue(sm);
   }
 }

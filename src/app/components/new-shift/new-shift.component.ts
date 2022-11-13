@@ -24,6 +24,10 @@ export class NewShiftComponent implements OnInit {
     userId: new FormControl('')
   });
 
+  get shiftDate(){
+    return this.shiftsService.date;
+  }
+
   get projects() {
     return this.projectsService.projects;
   }

@@ -11,6 +11,11 @@ export class ShiftsService {
 
   private shiftsData: Shifts = new Shifts();
   private shiftDate: Date = new Date();
+  private totalHoursDay: number = 0;
+
+  get totalHours(){
+    return this.totalHoursDay;
+  }
 
   get date() {
     return this.shiftDate;
@@ -38,6 +43,7 @@ export class ShiftsService {
   }
 
   async listShifts() {
+    this.shiftsData = new Shifts();
     const date = moment(this.date).format('YYYY-MM-DD');
     this.shiftsData = await this.http.get(`${environment.url}/list-shifts?date=${date}`).toPromise() as any;
   }
