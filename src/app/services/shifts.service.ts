@@ -27,8 +27,8 @@ export class ShiftsService {
     this.listShifts();
   }
 
-  async terminateShift(body) {
-    await this.http.post(`${environment.url}/terminate-shift`, body).toPromise();
+  async updateShift(body) {
+    await this.http.post(`${environment.url}/update-shift`, body).toPromise();
     this.listShifts();
   }
 

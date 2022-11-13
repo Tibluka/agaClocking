@@ -29,6 +29,10 @@ html {
     @media (max-width: 720px) {
         font-size: 87.5%;
     }
+
+    @media (max-width: 300px) {
+        font-size: 80.5%;
+    }
 }
 
 body {
@@ -42,7 +46,6 @@ label,
 button {
     font-family: "Encode Sans", sans-serif;
     font-weight: 500;
-    font-size: 16px;
 }
 
 h1,
@@ -66,7 +69,7 @@ strong {
 
 .primary-btn {
     border-radius: 50px;
-    height: 42px;
+    height: 36px;
     background: var(--gradient);
     border: none;
     color: white;
@@ -74,19 +77,12 @@ strong {
 
 .secondary-btn {
     border-radius: 50px;
-    height: 42px;
+    height: 36px;
     background: var(--gray-light);
     border: 1px solid var(--gradient);
     color: var(--primary);
     outline: 0;
     &:focus{
         outline: 0;
-    }
-}
-
-
-.form-group {
-    input {
-        height: 39.3px !important;
     }
 }

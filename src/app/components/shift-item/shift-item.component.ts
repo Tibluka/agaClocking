@@ -9,6 +9,7 @@ import { Shift } from 'src/app/models/shifts';
 export class ShiftItemComponent implements OnInit {
 
   @Input() shift: Shift = new Shift();
+  @Input() index: number;
 
   constructor() { }
 

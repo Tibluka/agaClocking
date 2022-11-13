@@ -11,8 +11,8 @@
     </div>
 
     <div class="body" *ngIf="shifts.length > 0; else noShifts">
-        <div class="shifts" (click)="terminateShift(shift)" *ngFor="let shift of shifts">
-            <app-shift-item [shift]="shift"></app-shift-item>
+        <div class="shifts" (click)="updateShift(shift)" *ngFor="let shift of shifts; index as i">
+            <app-shift-item [index]="i" [shift]="shift"></app-shift-item>
         </div>
     </div>
     <ng-template #noShifts>

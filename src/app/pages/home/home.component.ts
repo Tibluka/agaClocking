@@ -61,14 +61,27 @@ export class HomeComponent implements OnInit {
     this.shiftsService.nextShiftDate();
   }
 
-  terminateShift(shift: Shift) {
+  updateShift(shift: Shift) {
     const modal = this.ngbModal.open(UpdateShiftComponent, { size: 'md', centered: true });
     modal.componentInstance.shiftForm = new FormGroup({
       endShift: new FormControl(moment(this.shiftDate).format('YYYY-MM-DDTHH:mm:ss')),
+      startShift: new FormControl(moment(shift.startShift).format('YYYY-MM-DDTHH:mm:ss')),
+      activity: new FormControl(shift.activity),
       shiftId: new FormControl(shift._id.$oid)
     });
-    modal.componentInstance.hour = this.today.getHours();
-    modal.componentInstance.minute = this.today.getMinutes();
+
+    modal.componentInstance.activity = shift.activity;
+
+    if (shift.finished === true) {
+      modal.componentInstance.startShiftHour = Number(moment(shift.startShift).format('HH'));
+      modal.componentInstance.startShiftMinute = Number(moment(shift.startShift).format('mm'));
+      modal.componentInstance.endShiftHour = Number(moment(shift.endShift).format('HH'));
+      modal.componentInstance.endShiftMinute = Number(moment(shift.endShift).format('mm'));
+    } else {
+      modal.componentInstance.startShiftHour = Number(moment(shift.startShift).format('HH'));
+      modal.componentInstance.startShiftMinute = Number(moment(shift.startShift).format('mm'));
+    }
+
   }
 
 }

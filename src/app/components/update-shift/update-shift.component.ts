@@ -13,11 +13,17 @@ import { ShiftsService } from 'src/app/services/shifts.service';
 export class UpdateShiftComponent implements OnInit {
 
 
-  hour = 0;
-  minute = 0;
+  startShiftHour = 0;
+  startShiftMinute = 0;
+
+  endShiftHour = 0;
+  endShiftMinute = 0;
+
   today: Date = new Date();
   shiftForm: FormGroup = new FormGroup({
-    endShift: new FormControl(null),
+    startShift: new FormControl(''),
+    activity: new FormControl(''),
+    endShift: new FormControl(''),
     shiftId: new FormControl('')
   });
 
@@ -53,19 +59,24 @@ export class UpdateShiftComponent implements OnInit {
 
   async updateShift() {
     if (this.shiftForm.valid) {
-      if(this.shiftForm){
-
-      }
-      await this.shiftsService.terminateShift(this.shiftForm.value);
+      await this.shiftsService.updateShift(this.shiftForm.value);
       this.activeModal.close();
     }
   }
 
-  changeHour() {
-    this.shiftForm.get('endShift').setValue(moment().set('hours', Number(this.hour)).format('YYYY-MM-DDTHH:mm:ss'));
+  changeHour(shift: string) {
+    let shiftHour = 0;
+    if (shift === 'endShift') {
+      shiftHour = this.endShiftHour;
+    }else shiftHour = this.startShiftHour;
+    this.shiftForm.get(shift).setValue(moment().set('hours', Number(shiftHour)).format('YYYY-MM-DDTHH:mm:ss'));
   }
 
-  changeMinute() {
-    this.shiftForm.get('endShift').setValue(moment().set('minutes', Number(this.minute)).format('YYYY-MM-DDTHH:mm:ss'));
+  changeMinute(shift: string) {
+    let shiftMinute = 0;
+    if (shift === 'endShift') {
+      shiftMinute = this.endShiftMinute;
+    }else shiftMinute = this.startShiftMinute;
+    this.shiftForm.get(shift).setValue(moment().set('minutes', Number(shiftMinute)).format('YYYY-MM-DDTHH:mm:ss'));
   }
 }
