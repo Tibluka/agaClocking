@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('user', JSON.stringify(access.user));
       this.router.navigate(['/home']);
     },err=>{
-      alert(err.error)
+      alert(err.status)
     })
   }
 
