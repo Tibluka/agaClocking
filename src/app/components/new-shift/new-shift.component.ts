@@ -69,10 +69,12 @@ export class NewShiftComponent implements OnInit {
   }
 
   changeHour() {
-    this.shiftForm.get('startShift').setValue(moment().set('hours', Number(this.hour)).format('YYYY-MM-DDTHH:mm:ss'));
+    let sh = moment(this.shiftForm.get('startShift').value).set('hours', Number(this.hour)).format('YYYY-MM-DDTHH:mm:ss');
+    this.shiftForm.get('startShift').setValue(sh);
   }
   changeMinute() {
-    this.shiftForm.get('startShift').setValue(moment().set('minutes', Number(this.minute)).format('YYYY-MM-DDTHH:mm:ss'));
+    let sm = moment(this.shiftForm.get('startShift').value).set('minutes', Number(this.minute)).format('YYYY-MM-DDTHH:mm:ss');
+    this.shiftForm.get('startShift').setValue(sm);
   }
 
 }
