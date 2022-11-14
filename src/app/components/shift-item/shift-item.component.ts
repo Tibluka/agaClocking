@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Shift } from 'src/app/models/shifts';
 
 @Component({
@@ -11,7 +12,12 @@ export class ShiftItemComponent implements OnInit {
   @Input() shift: Shift = new Shift();
   @Input() index: number;
 
-  constructor() { }
+  @Output() deleteOutput = new EventEmitter();
+  @Output() updateOutput = new EventEmitter();
+
+  deleteState: boolean = false;
+
+  constructor(private ngbModal: NgbModal) { }
 
   ngOnInit(): void {
   }
@@ -29,5 +35,20 @@ export class ShiftItemComponent implements OnInit {
     }
   }
 
+  swipeRight() {
+    this.deleteState = true;
+  }
+
+  swipeLeft() {
+    this.deleteState = false;
+  }
+
+  deleteShift() {
+    this.deleteOutput.emit(this.shift);
+  }
+
+  updateShift(){
+    this.updateOutput.emit(this.shift);
+  }
 
 }

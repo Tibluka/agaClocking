@@ -1,0 +1,23 @@
+<div class="modal-header d-flex justify-content-between">
+    Deletar registro <span class="d-block">{{shiftDate | date: 'dd/MM/yyyy'}}</span>
+</div>
+
+<div class="modal-body text-center">
+
+    <div class="title" *ngIf="shift.finished; else notFinished">
+        Deseja remover o turno registrado das <b>{{shift.startShift | date: 'HH:mm'}}</b> ás <b>{{shift.endShift | date:
+            'HH:mm'}}</b>
+        no projeto <b>{{shift.project}}</b> ?
+    </div>
+    <ng-template #notFinished>
+        <div class="title">
+            Deseja remover o turno iniciado ás <b>{{shift.startShift | date: 'HH:mm'}}</b> no projeto
+            <b>{{shift.project}}</b> ?
+        </div>
+    </ng-template>
+
+    <div class="d-flex flex-column mt-5">
+        <button class="secondary-btn w-100" type="button" (click)="cancel()">Cancelar</button>
+        <button class="primary-btn w-100 mt-3" (click)="deleteShift()">Cadastrar</button>
+    </div>
+</div>

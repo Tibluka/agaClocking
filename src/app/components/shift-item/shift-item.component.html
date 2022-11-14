@@ -1,10 +1,16 @@
-<div class="shift" [ngStyle]="{'border-top': index === 0 ? '1px solid var(--borders)' : ''}">
-    <div class="d-flex align-items-center">
-        <img *ngIf="shift.finished" src="../../../assets/icons/shift-finished-icon.svg" alt="">
-        <img *ngIf="!shift.finished" src="../../../assets/icons/shift-initiated-icon.svg" alt="">
-        <span class="d-block ms-2">{{shift.project}}</span>
+<div class="shift-parent" [ngStyle]="{'border-top': index === 0 ? '1px solid var(--borders)' : ''}">
+    <div class="shift" (click)="updateShift()" (swiperight)="swipeRight()" (swipeLeft)="swipeLeft()"
+        [ngClass]="{'enable-delete' : deleteState}">
+        <div class="d-flex align-items-center">
+            <img *ngIf="shift.finished" src="../../../assets/icons/shift-finished-icon.svg" alt="">
+            <img *ngIf="!shift.finished" src="../../../assets/icons/shift-initiated-icon.svg" alt="">
+            <span class="d-block ms-2">{{shift.project}}</span>
+        </div>
+        <span>{{shift.startShift | date: 'HH:mm'}} <span *ngIf="shift.finished">às</span> {{ shift.endShift |
+            date: 'HH:mm'}}</span>
+        <span>{{calculateDifference(shift)}}</span>
     </div>
-    <span>{{shift.startShift | date: 'HH:mm'}} <span *ngIf="shift.finished">às</span> {{ shift.endShift |
-        date: 'HH:mm'}}</span>
-    <span>{{calculateDifference(shift)}}</span>
+    <div class="under-layer" (click)="deleteShift()">
+        <img src="../../../assets/icons/trash-can-icon.svg" alt="">
+    </div>
 </div>

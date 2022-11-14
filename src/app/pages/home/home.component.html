@@ -1,5 +1,5 @@
 <main>
-    <div style="height: 90px;"></div>
+    <div style="height: 80px;"></div>
 
     <div class="date-time d-flex align-items-center justify-content-between">
         <img (click)="previousShiftDate()" src="../../../assets/icons/left-arrow-icon.svg" alt="">
@@ -11,8 +11,8 @@
     </div>
 
     <div class="body" *ngIf="shifts.length > 0; else noShifts">
-        <div class="shifts" (click)="updateShift(shift)" *ngFor="let shift of shifts; index as i">
-            <app-shift-item [index]="i" [shift]="shift"></app-shift-item>
+        <div class="shifts" *ngFor="let shift of shifts; index as i">
+            <app-shift-item (deleteOutput)="deleteShift($event)" (updateOutput)="updateShift($event)" [index]="i" [shift]="shift"></app-shift-item>
         </div>
     </div>
     <ng-template #noShifts>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import { DeleteShiftComponent } from 'src/app/components/delete-shift/delete-shift.component';
 import { UpdateShiftComponent } from 'src/app/components/update-shift/update-shift.component';
 import { Shift } from 'src/app/models/shifts';
 import { ShiftsService } from 'src/app/services/shifts.service';
@@ -81,7 +82,12 @@ export class HomeComponent implements OnInit {
       modal.componentInstance.endShiftHour = Number(moment(this.shiftDate).format('HH'));
       modal.componentInstance.endShiftMinute = Number(moment(this.shiftDate).format('mm'));
     }
+  }
 
+
+  deleteShift(shift: Shift) {
+    const modal = this.ngbModal.open(DeleteShiftComponent, { size: 'md', centered: true });
+    modal.componentInstance.shift = shift;
   }
 
 }
