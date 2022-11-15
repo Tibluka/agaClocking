@@ -11,10 +11,17 @@ export class ShiftsService {
 
   private shiftsData: Shifts = new Shifts();
   private shiftDate: Date = new Date();
-  private totalHoursDay: number = 0;
 
-  get totalHours(){
-    return this.totalHoursDay;
+  get totalTime() {
+    function toHoursAndMinutes(totalMinutes) {
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      return { hours, minutes };
+    }
+    let minutes = 0;
+    this.shifts.map((shift: Shift) => { minutes += shift.totalTimeInMinutes });
+
+    return toHoursAndMinutes(minutes);
   }
 
   get date() {

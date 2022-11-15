@@ -1,6 +1,6 @@
 <div class="shift-parent" [ngStyle]="{'border-top': index === 0 ? '1px solid var(--borders)' : ''}">
     <div class="shift" (click)="updateShift()" (swiperight)="swipeRight()" (swipeLeft)="swipeLeft()"
-        [ngClass]="{'enable-delete' : deleteState}">
+        [ngClass]="{'enable-delete' : deleteState, 'overnight': shift.overnight}">
         <div class="d-flex align-items-center">
             <img *ngIf="shift.finished" src="../../../assets/icons/shift-finished-icon.svg" alt="">
             <img *ngIf="!shift.finished" src="../../../assets/icons/shift-initiated-icon.svg" alt="">

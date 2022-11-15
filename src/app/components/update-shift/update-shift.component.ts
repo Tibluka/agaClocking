@@ -24,7 +24,8 @@ export class UpdateShiftComponent implements OnInit {
     startShift: new FormControl(''),
     activity: new FormControl(''),
     endShift: new FormControl(''),
-    shiftId: new FormControl('')
+    shiftId: new FormControl(''),
+    overnight: new FormControl(false)
   });
 
   get shiftDate() {
@@ -59,6 +60,10 @@ export class UpdateShiftComponent implements OnInit {
 
   async updateShift() {
     if (this.shiftForm.valid) {
+      if (this.shiftForm.get('overnight').value === true) {
+        let nextDay = moment(this.shiftForm.get('endShift').value).add(1, 'days').format('YYYY-MM-DDTHH:mm:ss');
+        this.shiftForm.get('endShift').setValue(nextDay);
+      }
       await this.shiftsService.updateShift(this.shiftForm.value);
       this.activeModal.close();
     }
@@ -68,7 +73,7 @@ export class UpdateShiftComponent implements OnInit {
     let shiftHour = 0;
     if (shift === 'endShift') {
       shiftHour = this.endShiftHour;
-    }else shiftHour = this.startShiftHour;
+    } else shiftHour = this.startShiftHour;
     let sh = moment(this.shiftForm.get(shift).value).set('hours', Number(shiftHour)).format('YYYY-MM-DDTHH:mm:ss');
     this.shiftForm.get(shift).setValue(sh);
   }
@@ -77,7 +82,7 @@ export class UpdateShiftComponent implements OnInit {
     let shiftMinute = 0;
     if (shift === 'endShift') {
       shiftMinute = this.endShiftMinute;
-    }else shiftMinute = this.startShiftMinute;
+    } else shiftMinute = this.startShiftMinute;
     let sm = moment(this.shiftForm.get(shift).value).set('minutes', Number(shiftMinute)).format('YYYY-MM-DDTHH:mm:ss');
     this.shiftForm.get(shift).setValue(sm);
   }

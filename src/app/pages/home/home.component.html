@@ -5,7 +5,7 @@
         <img (click)="previousShiftDate()" src="../../../assets/icons/left-arrow-icon.svg" alt="">
         <div class="d-flex flex-column align-items-center">
             <div *ngIf="isToday()">Hoje</div>
-            <div>{{shiftDate | date: 'dd/MM/yyyy'}}</div>
+            <div>{{shiftDate | date: 'EEE dd/MM/yyyy'}}</div>
         </div>
         <img (click)="nextShiftDate()" src="../../../assets/icons/right-arrow-icon.svg" alt="">
     </div>
@@ -23,4 +23,5 @@
         </div>
 
     </ng-template>
+    <br><br><br><br><br><br>
 </main>

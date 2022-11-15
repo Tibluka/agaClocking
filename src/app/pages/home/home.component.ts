@@ -68,7 +68,8 @@ export class HomeComponent implements OnInit {
       endShift: new FormControl(moment(this.shiftDate).format('YYYY-MM-DDTHH:mm:ss')),
       startShift: new FormControl(moment(shift.startShift).format('YYYY-MM-DDTHH:mm:ss')),
       activity: new FormControl(shift.activity),
-      shiftId: new FormControl(shift._id.$oid)
+      shiftId: new FormControl(shift._id.$oid),
+      overnight: new FormControl(shift.overnight)
     });
 
     modal.componentInstance.activity = shift.activity;
