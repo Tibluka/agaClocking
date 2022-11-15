@@ -13,6 +13,6 @@
             <input type="password" inputmode="numeric" class="form-control" formControlName="password">
         </div>
 
-        <button type="submit" class="primary-btn w-100">Entrar</button>
+        <button type="submit" (keyup.enter)="login()" class="primary-btn w-100">Entrar</button>
     </form>
 </main>
