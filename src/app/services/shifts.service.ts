@@ -42,46 +42,53 @@ export class ShiftsService {
     return this.shiftsData.shifts;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
   async addNewShift(body) {
+    this.loadingService.setStatus(true);
     await this.http.post(`${environment.url}/initiate-shift`, body).toPromise();
     this.listShifts();
   }
 
   async updateShift(body) {
+    this.loadingService.setStatus(true);
     await this.http.post(`${environment.url}/update-shift`, body).toPromise();
     this.listShifts();
   }
 
   async deleteShift(shift: Shift) {
+    this.loadingService.setStatus(true);
     await this.http.post(`${environment.url}/delete-shift`, { shiftId: shift._id.$oid }).toPromise();
     this.listShifts();
   }
 
   async listShifts() {
+    this.loadingService.setStatus(true);
     this.shiftsData = new Shifts();
     const date = moment(this.date).format('YYYY-MM-DD');
     this.shiftsData = await this.http.get(`${environment.url}/list-shifts?date=${date}`).toPromise() as any;
+    this.loadingService.setStatus(false);
   }
 
   async getTotalHoursByMonth(month: number) {
+    this.loadingService.setStatus(true);
     const totalHours = await this.http.get(`${environment.url}/get-total-hours-by-month?month=${month}`).toPromise() as any;
     this.totalHoursByMonth = totalHours;
+    this.loadingService.setStatus(false);
   }
 
-  async previousShiftDate() {
+  previousShiftDate() {
     let date = new Date(this.date);
     date.setDate(date.getDate() - 1);
     this.shiftDate = date;
-    await this.listShifts();
+    this.listShifts();
   }
 
-  async nextShiftDate() {
+  nextShiftDate() {
     let date = new Date(this.date);
     date.setDate(date.getDate() + 1);
     this.shiftDate = date;
-    await this.listShifts();
+    this.listShifts();
   }
 
 }

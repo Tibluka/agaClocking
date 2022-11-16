@@ -56,16 +56,12 @@ export class HomeComponent implements OnInit {
     return false;
   }
 
-  async previousShiftDate() {
-    this.loadingService.setStatus(true);
-    await this.shiftsService.previousShiftDate();
-    this.loadingService.setStatus(false);
+  previousShiftDate() {
+    this.shiftsService.previousShiftDate();
   }
 
-  async nextShiftDate() {
-    this.loadingService.setStatus(true);
-    await this.shiftsService.nextShiftDate();
-    this.loadingService.setStatus(false);
+  nextShiftDate() {
+    this.shiftsService.nextShiftDate();
   }
 
   updateShift(shift: Shift) {
