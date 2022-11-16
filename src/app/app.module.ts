@@ -16,6 +16,7 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 import { HammerModule } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
 import { DeleteShiftComponent } from './components/delete-shift/delete-shift.component';
+import { AuthGuardService } from './services/guards/auth-guard.service';
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -41,10 +42,10 @@ export class MyHammerConfig extends HammerGestureConfig {
         path: '', component: AppComponent,
         children: [
           {
-            path: '', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+            path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
           },
           {
-            path: '', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+            path: '', canActivate: [AuthGuardService], loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
           }
 
         ]

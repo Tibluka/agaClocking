@@ -1,17 +1,40 @@
 main {
+    background-color: var(--background-login);
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    padding: 0 40px;
+    padding: 80px 40px;
     img {
-        margin-bottom: 100px;
         width: 120px;
     }
-    form {
-        button {
-            margin-top: 75px;
-        }
+}
+
+.form-group {
+    background-color: white;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 2px 2px 19px -11px #c0b2b2;
+    label{
+        color: gray;
+    }
+    input,
+    select,
+    textarea {
+        border: none !important;
+        background-color: white !important;
+        padding-left: 25px;
+        color: gray;
+    }
+    .bi{
+        position: absolute;
+        top: 35px;
+        left: 15px;
+        filter: invert(0.5);
     }
 }

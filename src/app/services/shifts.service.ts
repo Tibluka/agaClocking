@@ -25,7 +25,11 @@ export class ShiftsService {
   }
 
   get date() {
-    return this.shiftDate;
+    const currentTime = new Date(); // adjusts current hours and minutes of the day
+    let shiftDateHoursOk = new Date(this.shiftDate.setHours(currentTime.getHours()));
+    let shiftDateMinutesOk = new Date(shiftDateHoursOk.setMinutes(currentTime.getMinutes()));
+    let shiftDateSecondsOk = new Date(shiftDateMinutesOk.setSeconds(currentTime.getSeconds()));
+    return shiftDateSecondsOk;
   }
 
   get shifts() {
