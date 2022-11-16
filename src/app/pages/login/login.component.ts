@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -16,16 +17,20 @@ export class LoginComponent implements OnInit {
   })
 
   constructor(private router: Router,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private loadingService: LoadingService) { }
 
   ngOnInit(): void {
   }
 
   login() {
+    this.loadingService.setStatus(true);
     this.loginService.login(this.userForm.value).subscribe((access: any) => {
+      this.loadingService.setStatus(false);
       localStorage.setItem('user_agaclocking', JSON.stringify(access.user));
       this.router.navigate(['/home']);
-    },err=>{
+    }, err => {
+      this.loadingService.setStatus(false);
       alert(err.status)
     })
   }

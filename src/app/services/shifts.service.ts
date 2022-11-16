@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { Shift, Shifts } from '../models/shifts';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,11 @@ export class ShiftsService {
 
   private shiftsData: Shifts = new Shifts();
   private shiftDate: Date = new Date();
+  private totalHoursByMonth: number = 0;
+
+  get totalHoursMonth() {
+    return this.totalHoursByMonth;
+  }
 
   get totalTime() {
     function toHoursAndMinutes(totalMinutes) {
@@ -59,18 +65,23 @@ export class ShiftsService {
     this.shiftsData = await this.http.get(`${environment.url}/list-shifts?date=${date}`).toPromise() as any;
   }
 
-  previousShiftDate() {
+  async getTotalHoursByMonth(month: number) {
+    const totalHours = await this.http.get(`${environment.url}/get-total-hours-by-month?month=${month}`).toPromise() as any;
+    this.totalHoursByMonth = totalHours;
+  }
+
+  async previousShiftDate() {
     let date = new Date(this.date);
     date.setDate(date.getDate() - 1);
     this.shiftDate = date;
-    this.listShifts();
+    await this.listShifts();
   }
 
-  nextShiftDate() {
+  async nextShiftDate() {
     let date = new Date(this.date);
     date.setDate(date.getDate() + 1);
     this.shiftDate = date;
-    this.listShifts();
+    await this.listShifts();
   }
 
 }

@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { DeleteShiftComponent } from 'src/app/components/delete-shift/delete-shift.component';
 import { UpdateShiftComponent } from 'src/app/components/update-shift/update-shift.component';
 import { Shift } from 'src/app/models/shifts';
+import { LoadingService } from 'src/app/services/loading.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(private shiftsService: ShiftsService,
+    private loadingService: LoadingService,
     private ngbModal: NgbModal) {
     this.shiftsService.listShifts();
   }
@@ -54,12 +56,16 @@ export class HomeComponent implements OnInit {
     return false;
   }
 
-  previousShiftDate() {
-    this.shiftsService.previousShiftDate();
+  async previousShiftDate() {
+    this.loadingService.setStatus(true);
+    await this.shiftsService.previousShiftDate();
+    this.loadingService.setStatus(false);
   }
 
-  nextShiftDate() {
-    this.shiftsService.nextShiftDate();
+  async nextShiftDate() {
+    this.loadingService.setStatus(true);
+    await this.shiftsService.nextShiftDate();
+    this.loadingService.setStatus(false);
   }
 
   updateShift(shift: Shift) {

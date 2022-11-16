@@ -17,6 +17,8 @@ import { HammerModule } from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
 import { DeleteShiftComponent } from './components/delete-shift/delete-shift.component';
 import { AuthGuardService } from './services/guards/auth-guard.service';
+import { LoadingComponent } from './components/loading/loading.component';
+import { LoadingModule } from './components/loading/loading.module';
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -36,6 +38,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ReactiveFormsModule,
     HttpClientModule,
     HammerModule,
+    LoadingModule,
     FormsModule,
     RouterModule.forRoot([
       {
