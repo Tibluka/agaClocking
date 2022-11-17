@@ -18,7 +18,10 @@ import { FooterComponent } from '../components/footer/footer.component';
         path: '', component: PagesComponent,
         children: [
           {
-            path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+            path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+          },
+          {
+            path: 'calendar', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
           }
         ]
       }

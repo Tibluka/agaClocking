@@ -13,6 +13,10 @@ import { NewShiftComponent } from '../new-shift/new-shift.component';
 })
 export class FooterComponent implements OnInit {
 
+  get currentRoute() {
+    return location.pathname;
+  }
+
   get shiftDate() {
     return this.shiftsService.date;
   }
@@ -21,8 +25,12 @@ export class FooterComponent implements OnInit {
     return this.shiftsService.shifts;
   }
 
-  get totalTime(){
+  get totalTime() {
     return this.shiftsService.totalTime;
+  }
+
+  get totalHoursByMonth() {
+    return this.shiftsService.totalHoursMonth;
   }
 
   constructor(private modal: NgbModal,

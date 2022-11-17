@@ -1,0 +1,32 @@
+main {
+  height: calc(100vh - 194px);
+  header {
+    padding: 10px 20px;
+  }
+  .calendar {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    text-align: center;
+    height: calc(100% - 40px);
+    grid-auto-rows: auto;
+
+    .previous-month {
+      background-color: var(--gray-light);
+    }
+    .day {
+      min-height: 100%;
+      font-size: 9px;
+      text-align: left;
+      overflow: hidden;
+      overflow-y: scroll;
+    }
+    .current-day {
+      background-color: var(--gray-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+  }
+}

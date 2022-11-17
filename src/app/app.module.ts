@@ -1,24 +1,21 @@
-import { Injectable, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { PagesComponent } from './pages/pages.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { NewShiftComponent } from './components/new-shift/new-shift.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
-
-
-import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerModule } from '@angular/platform-browser';
+import localePt from '@angular/common/locales/pt';
+import { Injectable, LOCALE_ID, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as Hammer from 'hammerjs';
+import { AppComponent } from './app.component';
 import { DeleteShiftComponent } from './components/delete-shift/delete-shift.component';
-import { AuthGuardService } from './services/guards/auth-guard.service';
-import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingModule } from './components/loading/loading.module';
+import { NewShiftComponent } from './components/new-shift/new-shift.component';
+import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
+import { AuthGuardService } from './services/guards/auth-guard.service';
+
+registerLocaleData(localePt);
+
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -61,6 +58,10 @@ export class MyHammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
     },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-PT'
+    }
   ],
   bootstrap: [AppComponent]
 })

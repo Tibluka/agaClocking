@@ -1,0 +1,22 @@
+<div style="height: 90px;"></div>
+<main>
+    <header class="d-flex justify-content-between">
+        <div *ngFor="let weekDay of weekDays">
+            {{weekDay.description}}
+        </div>
+    </header>
+    <div class="calendar">
+        <div class="day position-relative" (click)="selectDate(dayObject)"
+            [ngClass]="{'previous-month': dayObject.previousMonth, 'current-day': dayObject.day === currentDay}"
+            *ngFor="let dayObject of monthDays">
+            <span>
+                {{dayObject.day}}
+            </span>
+            <div>
+                <div class="day-shifts" *ngFor="let shift of dayObject.shifts">
+                    {{toHoursAndMinutes(shift.totalTimeInMinutes).hours}}:{{toHoursAndMinutes(shift.totalTimeInMinutes).minutes}}h
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

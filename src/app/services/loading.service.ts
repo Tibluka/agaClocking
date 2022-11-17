@@ -15,5 +15,6 @@ export class LoadingService {
 
   setStatus(status: boolean) {
     this.loadingStatus = status;
+    return status
   }
 }

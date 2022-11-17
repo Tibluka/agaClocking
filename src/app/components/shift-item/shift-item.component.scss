@@ -5,7 +5,7 @@
     .shift {
         transition: 300ms;
         height: 74px;
-        padding: 20px 28px;
+        padding: 20px;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -14,6 +14,9 @@
         background-color: white;
         position: relative;
         z-index: 1;
+        img {
+            width: 20px;
+        }
     }
     .under-layer {
         position: absolute;
@@ -27,7 +30,7 @@
         width: 65px;
         justify-content: center;
     }
-    .overnight{
+    .overnight {
         color: var(--overnight);
         font-style: italic;
         font-weight: 600;

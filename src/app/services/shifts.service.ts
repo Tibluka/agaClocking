@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { Shift, Shifts } from '../models/shifts';
@@ -12,7 +13,13 @@ export class ShiftsService {
 
   private shiftsData: Shifts = new Shifts();
   private shiftDate: Date = new Date();
-  private totalHoursByMonth: number = 0;
+  private shiftMonth: Date = new Date();
+  private totalHoursByMonth: string = '0h';
+  private monthDays = [];
+
+  get daysOfMonth() {
+    return this.monthDays;
+  }
 
   get totalHoursMonth() {
     return this.totalHoursByMonth;
@@ -28,6 +35,14 @@ export class ShiftsService {
     this.shifts.map((shift: Shift) => { minutes += shift.totalTimeInMinutes });
 
     return toHoursAndMinutes(minutes);
+  }
+
+  get month() {
+    const currentTime = new Date(); // adjusts current hours and minutes of the day
+    let shiftDateHoursOk = new Date(this.shiftMonth.setHours(currentTime.getHours()));
+    let shiftDateMinutesOk = new Date(shiftDateHoursOk.setMinutes(currentTime.getMinutes()));
+    let shiftDateSecondsOk = new Date(shiftDateMinutesOk.setSeconds(currentTime.getSeconds()));
+    return shiftDateSecondsOk;
   }
 
   get date() {
@@ -70,13 +85,6 @@ export class ShiftsService {
     this.loadingService.setStatus(false);
   }
 
-  async getTotalHoursByMonth(month: number) {
-    this.loadingService.setStatus(true);
-    const totalHours = await this.http.get(`${environment.url}/get-total-hours-by-month?month=${month}`).toPromise() as any;
-    this.totalHoursByMonth = totalHours;
-    this.loadingService.setStatus(false);
-  }
-
   previousShiftDate() {
     let date = new Date(this.date);
     date.setDate(date.getDate() - 1);
@@ -89,6 +97,86 @@ export class ShiftsService {
     date.setDate(date.getDate() + 1);
     this.shiftDate = date;
     this.listShifts();
+  }
+
+  setShiftDateTo(date: number, previousMonth?: boolean) {
+    let month = new Date(new Date(this.month).setMonth(this.month.getMonth() - (previousMonth ? 1 : 0)));
+    let newDate = new Date(new Date(this.date).setMonth(month.getMonth()));
+    newDate.setDate(date);
+    this.shiftDate = newDate;
+  }
+
+  async updateCalendarMonth() {
+    setTimeout(() => {
+      this.loadingService.setStatus(true);
+    }, 1);
+    function subtractMonths(numOfMonths, date = new Date()) {
+      date.setMonth(date.getMonth() - numOfMonths);
+      return date;
+    }
+
+    var lastDayOfMonth = new Date(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1, 0).getDate();
+    let days = [];
+    let firstWeekDayOfMonth = this.shiftMonth.getDay();
+
+    let newShiftMonth = new Date(this.shiftMonth);
+    const previousMonth = new Date(subtractMonths(1, newShiftMonth));
+    let lastDayOfPreviousMonth = new Date(previousMonth.getFullYear(), previousMonth.getMonth() + 1, 0).getDate();
+
+    for (let index = 0; index < firstWeekDayOfMonth + 1; index++) {
+      if (firstWeekDayOfMonth === 6) { continue };
+      days.push({ day: lastDayOfPreviousMonth, previousMonth: true, nextMonth: false });
+      lastDayOfPreviousMonth--;
+    }
+
+    days.reverse();
+
+    for (let index = 0; index < lastDayOfMonth; index++) {
+      days.push({ day: index + 1, previousMonth: false, nextMonth: false, shifts: [] });
+    }
+
+    let shiftReturn = await this.getTotalHoursByMonth(this.month.getFullYear(), this.month.getMonth() + 1);
+    days = days.map((objDay) => {
+      const shiftList: Array<Shift> = shiftReturn.shifts.
+        filter((shift: Shift) => new Date(shift.startShift).getDate() === objDay.day);
+      if (shiftList.length > 0) {
+        objDay.shifts = shiftList;
+      }
+      return objDay;
+    })
+    this.monthDays = days;
+
+  }
+
+  async getTotalHoursByMonth(year: number, month: number) {
+    function toHoursAndMinutes(totalMinutes) {
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      return { hours, minutes };
+    }
+
+    const totalMinutes = await this.http.get(`${environment.url}/get-shifts-by-month?year=${year}&month=${month}`).toPromise() as any;
+    let minutes = 0;
+    totalMinutes.shifts.forEach(sh => { minutes += sh.totalTimeInMinutes });
+
+    let obj = toHoursAndMinutes(minutes);
+    this.totalHoursByMonth = `${obj.hours}:${obj.minutes}`;
+    this.loadingService.setStatus(false);
+    return totalMinutes;
+  }
+
+  nextShiftMonth() {
+    let month = new Date(this.month);
+    month.setMonth(month.getMonth() + 1);
+    this.shiftMonth = month;
+    this.updateCalendarMonth();
+  }
+
+  previousShiftMonth() {
+    let month = new Date(this.month);
+    month.setMonth(month.getMonth() - 1);
+    this.shiftMonth = month;
+    this.updateCalendarMonth();
   }
 
 }

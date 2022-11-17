@@ -1,4 +1,12 @@
 <header>
-    Visão por dia
+    <b>{{viewType}}</b>
+    <div class="d-flex justify-content-center" *ngIf="viewType === 'Mês'">
+        <div class="month d-flex align-items-center">
+            <img class="rotate-90" (click)="previousMonth()" src="../../../assets/icons/arrow-down-icon.svg" alt="">
+            {{shiftMonth | date: 'MMMM/yyyy'}}
+            <img class="rotate-90-neg" (click)="nextMonth()" src="../../../assets/icons/arrow-down-icon.svg" alt="">
+        </div>
+
+    </div>
     <img src="../../../assets/icons/share-icon.svg" alt="">
 </header>

@@ -3,11 +3,17 @@
         <div>
             Total
         </div>
-        <div>
+        <div *ngIf="currentRoute !== '/calendar'; else byMonth">
             {{totalTime.hours}}:{{totalTime.minutes}}h
         </div>
+        <ng-template #byMonth>
+            <div>
+                {{totalHoursByMonth}}h
+
+            </div>
+        </ng-template>
     </div>
     <img class="graphics" src="../../../assets/icons/graphics-icon.svg" alt="">
     <img (click)="newShift()" class="add-shift" src="../../../assets/icons/new-shift-icon.svg" alt="">
-    <img class="calendar" src="../../../assets/icons/calendar-icon.svg" alt="">
+    <img class="calendar" routerLink="/calendar" src="../../../assets/icons/calendar-icon.svg" alt="">
 </footer>
