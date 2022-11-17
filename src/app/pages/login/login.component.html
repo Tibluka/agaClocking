@@ -5,14 +5,16 @@
     <form [formGroup]="userForm">
         <div class="form-group mb-4 position-relative">
             <label for="email">E-mail</label>
-            <input type="text" placeholder="user@agacode.com" class="form-control" formControlName="email">
+            <input type="text" placeholder="user@agacode.com" (keyup.enter)="login()" class="form-control"
+                formControlName="email">
             <i class="bi bi-envelope"></i>
         </div>
         <div class="form-group mb-4 position-relative">
             <label for="password">Senha</label>
-            <input type="password" inputmode="numeric" placeholder="******" class="form-control" formControlName="password">
+            <input type="password" inputmode="numeric" (keyup.enter)="login()" placeholder="******" class="form-control"
+                formControlName="password">
             <i class="bi bi-lock"></i>
         </div>
     </form>
-    <button type="submit" (click)="login()" (keyup.enter)="login()" class="primary-btn w-100">Entrar</button>
+    <button type="submit" (click)="login()" class="primary-btn w-100">Entrar</button>
 </main>
