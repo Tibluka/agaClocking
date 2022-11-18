@@ -156,7 +156,9 @@ export class ShiftsService {
       return { hours, minutes };
     }
 
-    const totalMinutes = await this.http.get(`${environment.url}/get-shifts-by-month?year=${year}&month=${month}`).toPromise() as any;
+    const user = JSON.parse(localStorage.getItem('user_agaclocking'));
+
+    const totalMinutes = await this.http.get(`${environment.url}/get-shifts-by-month?year=${year}&month=${month}&userId=${user.id}`).toPromise() as any;
     let minutes = 0;
     totalMinutes.shifts.forEach(sh => { minutes += sh.totalTimeInMinutes });
 
