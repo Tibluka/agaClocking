@@ -45,7 +45,7 @@ export class FooterComponent implements OnInit {
       alert('Ainda há um turno em aberto. Finalize para que possa iniciar um novo turno.')
       return;
     }
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user_agaclocking'));
     const modal = this.modal.open(NewShiftComponent, { size: 'sm', centered: true });
     modal.componentInstance.shiftForm = new FormGroup({
       startShift: new FormControl(moment(this.shiftDate).format('YYYY-MM-DDTHH:mm:ss')),

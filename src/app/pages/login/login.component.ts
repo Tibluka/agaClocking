@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.userForm.value).subscribe((access: any) => {
       this.loadingService.setStatus(false);
       localStorage.setItem('user_agaclocking', JSON.stringify(access.user));
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     }, err => {
       this.loadingService.setStatus(false);
       alert(err.status)

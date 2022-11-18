@@ -80,8 +80,9 @@ export class ShiftsService {
   async listShifts() {
     this.loadingService.setStatus(true);
     this.shiftsData = new Shifts();
+    const user = JSON.parse(localStorage.getItem('user_agaclocking'));
     const date = moment(this.date).format('YYYY-MM-DD');
-    this.shiftsData = await this.http.get(`${environment.url}/list-shifts?date=${date}`).toPromise() as any;
+    this.shiftsData = await this.http.get(`${environment.url}/list-shifts?date=${date}&userId=${user.id}`).toPromise() as any;
     this.loadingService.setStatus(false);
   }
 
