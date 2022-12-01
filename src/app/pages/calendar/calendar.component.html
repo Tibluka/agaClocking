@@ -1,7 +1,7 @@
 <div style="height: 90px;"></div>
 <main>
     <header class="d-flex justify-content-between">
-        <div *ngFor="let weekDay of weekDays">
+        <div class="week-day" *ngFor="let weekDay of weekDays">
             {{weekDay.description}}
         </div>
     </header>
@@ -10,7 +10,7 @@
             [ngClass]="{'previous-month': dayObject.previousMonth, 'current-day': dayObject.day === currentDay}"
             *ngFor="let dayObject of monthDays">
             <span>
-                {{dayObject.day}}
+                {{dayObject.day}} <span *ngIf="dayObject.previousMonth">/{{shiftMonth.getMonth()}}</span>
             </span>
             <div>
                 <div class="day-shifts" *ngFor="let shift of dayObject.shifts">

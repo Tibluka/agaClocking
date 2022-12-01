@@ -2,12 +2,15 @@ main {
   height: calc(100vh - 194px);
   header {
     padding: 10px 20px;
+    .week-day{
+      font-size: 10px;
+    }
   }
   .calendar {
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 1fr;
+    grid-auto-rows: 1fr !important;
     gap: 10px;
     text-align: center;
     height: calc(100% - 40px);

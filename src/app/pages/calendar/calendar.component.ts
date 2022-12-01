@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { weekdays } from 'moment';
+import { CalendarDay } from 'src/app/models/calendar';
 import { Shift } from 'src/app/models/shifts';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
@@ -26,13 +27,13 @@ export class CalendarComponent implements OnInit {
   }
 
   weekDays = [
-    { day: 0, description: 'D' },
-    { day: 1, description: 'S' },
-    { day: 2, description: 'T' },
-    { day: 3, description: 'Q' },
-    { day: 4, description: 'Q' },
-    { day: 5, description: 'S' },
-    { day: 6, description: 'S' }
+    { day: 0, description: 'Dom.' },
+    { day: 1, description: 'Seg.' },
+    { day: 2, description: 'Ter.' },
+    { day: 3, description: 'Qua.' },
+    { day: 4, description: 'Qui.' },
+    { day: 5, description: 'Sex.' },
+    { day: 6, description: 'Sáb.' }
   ]
 
   constructor(private shiftService: ShiftsService,
@@ -42,7 +43,7 @@ export class CalendarComponent implements OnInit {
     this.shiftService.updateCalendarMonth();
   }
 
-  selectDate(day) {
+  selectDate(day: CalendarDay) {
     this.shiftService.setShiftDateTo(day.day, day.previousMonth);
     this.router.navigate(['/']);
   }
