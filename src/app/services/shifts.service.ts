@@ -116,7 +116,7 @@ export class ShiftsService {
       return date;
     }
 
-    var lastDayOfMonth = new Date(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1, 0).getDate();
+    let lastDayOfMonth = new Date(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1, 0).getDate();
     let days = [];
     let firstWeekDayOfMonth = this.shiftMonth.getDay();
 
@@ -124,7 +124,7 @@ export class ShiftsService {
     const previousMonth = new Date(subtractMonths(1, newShiftMonth));
     let lastDayOfPreviousMonth = new Date(previousMonth.getFullYear(), previousMonth.getMonth() + 1, 0).getDate();
 
-    for (let index = 0; index < firstWeekDayOfMonth + 1; index++) {
+    for (let index = 0; index < firstWeekDayOfMonth; index++) {
       if (firstWeekDayOfMonth === 6) { continue };
       days.push({ day: lastDayOfPreviousMonth, previousMonth: true, nextMonth: false });
       lastDayOfPreviousMonth--;

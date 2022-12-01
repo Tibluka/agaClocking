@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
 @Component({
@@ -7,6 +9,10 @@ import { ShiftsService } from 'src/app/services/shifts.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  get user() {
+    return this.loginService.user;
+  }
 
   get currentRoute() {
     return location.pathname;
@@ -23,7 +29,9 @@ export class HeaderComponent implements OnInit {
     return this.shiftService.month;
   }
 
-  constructor(private shiftService: ShiftsService) { }
+  constructor(private shiftService: ShiftsService,
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,6 +42,11 @@ export class HeaderComponent implements OnInit {
 
   nextMonth() {
     this.shiftService.nextShiftMonth();
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
 }

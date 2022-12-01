@@ -6,7 +6,9 @@
             {{shiftMonth | date: 'MMMM/yyyy'}}
             <img class="rotate-90-neg" (click)="nextMonth()" src="../../../assets/icons/arrow-down-icon.svg" alt="">
         </div>
-
     </div>
-    <img src="../../../assets/icons/share-icon.svg" alt="">
+    <div class="d-flex align-items-center">
+        <img src="../../../assets/icons/share-icon.svg" alt="">
+        <span *ngIf="user.userType && user.userType === 'ADMIN'" (click)="logout()">logout</span>
+    </div>
 </header>

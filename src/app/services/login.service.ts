@@ -10,6 +10,8 @@ export class LoginService {
   private loggedUser = null;
 
   get user() {
+    const user = JSON.parse(localStorage.getItem('user_agaclocking'));
+    if (user) { this.loggedUser = user };
     return this.loggedUser;
   }
 
