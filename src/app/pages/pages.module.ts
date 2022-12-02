@@ -22,6 +22,9 @@ import { FooterComponent } from '../components/footer/footer.component';
           },
           {
             path: 'calendar', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
+          },
+          {
+            path: 'graphics', loadChildren: () => import('./graphics/graphics.module').then(m => m.GraphicsModule)
           }
         ]
       }
