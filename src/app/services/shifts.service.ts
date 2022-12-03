@@ -111,20 +111,26 @@ export class ShiftsService {
     setTimeout(() => {
       this.loadingService.setStatus(true);
     }, 1);
+
+    // local functions
     function subtractMonths(numOfMonths, date = new Date()) {
       date.setMonth(date.getMonth() - numOfMonths);
       return date;
     }
+    function getFirstDayOfMonth(year, month) {
+      return new Date(year, month, 1).getDay();
+    }
+    // local functions
 
     let lastDayOfMonth = new Date(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1, 0).getDate();
     let days = [];
-    let firstWeekDayOfMonth = this.shiftMonth.getDay();
+    let firstWeekDayOfMonth = getFirstDayOfMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth());
 
     let newShiftMonth = new Date(this.shiftMonth);
     const previousMonth = new Date(subtractMonths(1, newShiftMonth));
     let lastDayOfPreviousMonth = new Date(previousMonth.getFullYear(), previousMonth.getMonth() + 1, 0).getDate();
 
-    for (let index = 1; index < firstWeekDayOfMonth; index++) {
+    for (let index = 1; index < firstWeekDayOfMonth + 1; index++) {
       if (firstWeekDayOfMonth === 6) { continue };
       days.push({ day: lastDayOfPreviousMonth, previousMonth: true, nextMonth: false });
       lastDayOfPreviousMonth--;
@@ -132,7 +138,7 @@ export class ShiftsService {
 
     days.reverse();
 
-    for (let index = 0; index < lastDayOfMonth + 1; index++) {
+    for (let index = 0; index < lastDayOfMonth; index++) {
       days.push({ day: index + 1, previousMonth: false, nextMonth: false, shifts: [] });
     }
 
