@@ -19,6 +19,7 @@ export class User {
     userType: string;
     shifts: Array<Shift> = [];
     totalTime: string;
+    totalTimeInMinutes: number;
 }
 
 export class ObjectId {

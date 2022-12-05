@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { User } from 'src/app/models/graphics';
 import { GraphicsService } from 'src/app/services/graphics.service';
 
 @Component({
@@ -8,15 +10,28 @@ import { GraphicsService } from 'src/app/services/graphics.service';
 })
 export class GraphicsComponent implements OnInit {
 
-  get users() {
-    return this.graphicsService.users;
-  } 
+  barChartOptions: ChartOptions = {
+    showLines: false,
+    aspectRatio: 1,
+    responsive: true
+  }
 
-  constructor(private graphicsService: GraphicsService) { 
+  get barChartLabels() {
+    return [''];
+  }
+
+  barChartType: ChartType = 'bar';
+
+  barChartLegend = true;
+
+  get barChartData(): Array<ChartDataSets> {
+    return this.graphicsService.charts;
+  };
+
+  constructor(private graphicsService: GraphicsService) {
     this.graphicsService.listUsers();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

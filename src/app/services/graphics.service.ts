@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ChartDataSets } from 'chart.js';
 import { environment } from 'src/environments/environment';
 import { User, Users } from '../models/graphics';
 import { Shift } from '../models/shifts';
@@ -11,6 +12,11 @@ import { LoadingService } from './loading.service';
 export class GraphicsService {
 
   private usersData: Users = new Users();
+  private chartDataSets: Array<ChartDataSets> = [];
+
+  get charts() {
+    return this.chartDataSets;
+  }
 
   get users() {
     function toHoursAndMinutes(totalMinutes) {
@@ -25,6 +31,7 @@ export class GraphicsService {
         totalTimeInMinutes += shift.totalTimeInMinutes;
       });
       user.totalTime = `${toHoursAndMinutes(totalTimeInMinutes).hours}:${toHoursAndMinutes(totalTimeInMinutes).minutes}hrs`
+      user.totalTimeInMinutes = totalTimeInMinutes;
       return user;
     });
   }
@@ -35,8 +42,12 @@ export class GraphicsService {
   async listUsers() {
     this.loadingService.setStatus(true);
     this.usersData = await this.http.get(`${environment.url}/list-users`).toPromise() as any;
-    console.log(this.users);
-
+    this.chartDataSets = this.users.map(user => {
+      let chartDataSet: ChartDataSets = {};
+      chartDataSet['data'] = [Number(user.totalTimeInMinutes)];
+      chartDataSet['label'] = user.name;
+      return chartDataSet;
+    })
     this.loadingService.setStatus(false);
   }
 
