@@ -1,13 +1,21 @@
 <div style="height: 90px;"></div>
 
-<main>
+<main class="p-2">
+    <div class="form-group">
+        <label for="user"></label>
+        <select (change)="changeUser($event)" [value]="selectedUser" name="user" class="form-select">
+            <option value="">Todos os usuários</option>
+           <option *ngFor="let user of users" [value]="user.userId">{{user.name}}</option>
+        </select>
+    </div>
     <div class="projects d-flex mt-4">
         <div class="d-flex justify-content-between flex-column">
             <div>{{highestAmountHourProject}}</div>
             <div>{{highestAmountHourProject / 2}}</div>
             <div>0</div>
         </div>
-        <div class="project align-self-end position-relative" [ngStyle]="{'height': getPercentage(project.totalInMinutes)+'%'}"
+        <div class="project align-self-end position-relative"
+            [ngStyle]="{'height': getPercentage(project.totalInMinutes)+'%'}"
             *ngFor="let project of hoursByProject; index as i">
             <span class="project-time">{{getTotalInHours(project.totalInMinutes)}}</span>
             <span class="project-title">{{project.project}}</span>

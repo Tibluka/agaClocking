@@ -12,6 +12,11 @@ export class GraphicsService {
 
   private usersData: Users = new Users();
   private hoursByProjectData: Array<{ project: string, totalInMinutes: number }> = [];
+  private selectedUserData = '';
+
+  get selectedUser() {
+    return this.selectedUserData;
+  }
 
   get hoursByProject() {
     return this.hoursByProjectData;
@@ -52,10 +57,14 @@ export class GraphicsService {
   async setChartByMonth(year: number, month: number) {
     this.loadingService.setStatus(true);
 
-    const { hours } = await this.http.get(`${environment.url}/get-all-shifts-by-projects-month?year=${year}&month=${month}`).toPromise() as any;
+    const { hours } = await this.http.get(`${environment.url}/get-all-shifts-by-projects-month?year=${year}&month=${month}&userId=${this.selectedUser}`).toPromise() as any;
     this.hoursByProjectData = hours;
 
     this.loadingService.setStatus(false);
+  }
+
+  setSelectedUser(userId: string){
+    this.selectedUserData = userId;
   }
 
   toHoursAndMinutes(totalMinutes) {
@@ -63,5 +72,5 @@ export class GraphicsService {
     const minutes = totalMinutes % 60;
     return { hours, minutes };
   }
-  
+
 }

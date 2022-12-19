@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { User } from 'src/app/models/graphics';
 import { GraphicsService } from 'src/app/services/graphics.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 
@@ -9,6 +10,14 @@ import { ShiftsService } from 'src/app/services/shifts.service';
   styleUrls: ['./graphics.component.scss']
 })
 export class GraphicsComponent implements OnInit {
+
+  get selectedUser(){
+    return this.graphicsService.selectedUser;
+  }
+
+  get users(){
+    return this.graphicsService.users;
+  }
 
   get shiftMonth() {
     return this.shiftsService.month;
@@ -33,6 +42,7 @@ export class GraphicsComponent implements OnInit {
   constructor(private graphicsService: GraphicsService,
     private shiftsService: ShiftsService) {
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
+    this.graphicsService.listUsers();
   }
 
   ngOnInit(): void { }
@@ -45,6 +55,13 @@ export class GraphicsComponent implements OnInit {
   getTotalInHours(totalInMinutes: number) {
     const zbm = this.graphicsService.toHoursAndMinutes(totalInMinutes).minutes < 10 ? '0' : '';
     return `${this.graphicsService.toHoursAndMinutes(totalInMinutes).hours}:${zbm}${this.graphicsService.toHoursAndMinutes(totalInMinutes).minutes}h`
+  }
+
+  changeUser(event: any) {
+    this.graphicsService.setSelectedUser(event.target.value);
+    console.log(event.target.value);
+    
+    this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
   }
 
 }
