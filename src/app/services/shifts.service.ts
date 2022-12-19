@@ -4,6 +4,7 @@ import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { Shift, Shifts } from '../models/shifts';
+import { GraphicsService } from './graphics.service';
 import { LoadingService } from './loading.service';
 
 @Injectable({
@@ -57,7 +58,8 @@ export class ShiftsService {
     return this.shiftsData.shifts;
   }
 
-  constructor(private http: HttpClient, private loadingService: LoadingService) { }
+  constructor(private http: HttpClient, private loadingService: LoadingService,
+    private graphicsService: GraphicsService) { }
 
   async addNewShift(body) {
     this.loadingService.setStatus(true);
@@ -152,7 +154,7 @@ export class ShiftsService {
       return objDay;
     })
     this.monthDays = days;
-
+    this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
   }
 
   async getTotalHoursByMonth(year: number, month: number) {

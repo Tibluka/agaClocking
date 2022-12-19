@@ -1,0 +1,26 @@
+main {
+    .projects {
+        display: flex;
+        height: 300px;
+        padding: 10px;
+        .project {
+            width: 100%;
+            background: blue;
+            margin: 0 5px;
+            .project-title {
+                position: absolute;
+                transform: rotate(45deg);
+                bottom: -40px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                width: 50px;
+            }
+            .project-time{
+                position: absolute;
+                top: -20px;
+                font-size: 10px !important;
+            }
+        }
+    }
+}

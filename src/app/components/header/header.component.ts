@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     return location.pathname;
   }
   get viewType() {
-    if (this.currentRoute === '/calendar') {
+    if (this.currentRoute !== '/') {
       return 'Mês'
     } else {
       return 'Dia'

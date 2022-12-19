@@ -1,8 +1,16 @@
 <div style="height: 90px;"></div>
 
-
-<div class="d-block">
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-        [legend]="barChartLegend" [chartType]="barChartType">
-    </canvas>
-</div>
+<main>
+    <div class="projects d-flex mt-4">
+        <div class="d-flex justify-content-between flex-column">
+            <div>{{highestAmountHourProject}}</div>
+            <div>{{highestAmountHourProject / 2}}</div>
+            <div>0</div>
+        </div>
+        <div class="project align-self-end position-relative" [ngStyle]="{'height': getPercentage(project.totalInMinutes)+'%'}"
+            *ngFor="let project of hoursByProject; index as i">
+            <span class="project-time">{{getTotalInHours(project.totalInMinutes)}}</span>
+            <span class="project-title">{{project.project}}</span>
+        </div>
+    </div>
+</main>

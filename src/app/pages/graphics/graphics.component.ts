@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { User } from 'src/app/models/graphics';
 import { GraphicsService } from 'src/app/services/graphics.service';
+import { ShiftsService } from 'src/app/services/shifts.service';
 
 @Component({
   selector: 'app-graphics',
@@ -10,28 +10,41 @@ import { GraphicsService } from 'src/app/services/graphics.service';
 })
 export class GraphicsComponent implements OnInit {
 
-  barChartOptions: ChartOptions = {
-    showLines: false,
-    aspectRatio: 1,
-    responsive: true
+  get shiftMonth() {
+    return this.shiftsService.month;
   }
 
-  get barChartLabels() {
-    return [''];
+  get totalHoursByMonth() {
+    return this.graphicsService.totalHoursByMonth;
   }
 
-  barChartType: ChartType = 'bar';
+  get hoursByProject() {
+    return this.graphicsService.hoursByProject;
+  }
 
-  barChartLegend = true;
+  get highestAmountHourProject() {
+    const arr = this.graphicsService.hoursByProject;
+    const highest = Math.max(...arr.map(o => o.totalInMinutes))
 
-  get barChartData(): Array<ChartDataSets> {
-    return this.graphicsService.charts;
-  };
+    if (highest === -Infinity) { return 0 }
+    return this.graphicsService.toHoursAndMinutes(highest).hours + 10;
+  }
 
-  constructor(private graphicsService: GraphicsService) {
-    this.graphicsService.listUsers();
+  constructor(private graphicsService: GraphicsService,
+    private shiftsService: ShiftsService) {
+    this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
   }
 
   ngOnInit(): void { }
+
+  getPercentage(totalInMinutes: number) {
+    const percentage = (this.graphicsService.toHoursAndMinutes(totalInMinutes).hours / this.highestAmountHourProject) * 100;
+    return percentage;
+  }
+
+  getTotalInHours(totalInMinutes: number) {
+    const zbm = this.graphicsService.toHoursAndMinutes(totalInMinutes).minutes < 10 ? '0' : '';
+    return `${this.graphicsService.toHoursAndMinutes(totalInMinutes).hours}:${zbm}${this.graphicsService.toHoursAndMinutes(totalInMinutes).minutes}h`
+  }
 
 }
