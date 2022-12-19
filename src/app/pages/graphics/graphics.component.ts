@@ -59,8 +59,6 @@ export class GraphicsComponent implements OnInit {
 
   changeUser(event: any) {
     this.graphicsService.setSelectedUser(event.target.value);
-    console.log(event.target.value);
-    
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
   }
 

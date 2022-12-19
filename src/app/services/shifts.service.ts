@@ -15,7 +15,7 @@ export class ShiftsService {
   private shiftsData: Shifts = new Shifts();
   private shiftDate: Date = new Date();
   private shiftMonth: Date = new Date();
-  private totalHoursByMonth: string = '0h';
+  private totalHoursByMonth: string = '0';
   private monthDays = [];
 
   get daysOfMonth() {
