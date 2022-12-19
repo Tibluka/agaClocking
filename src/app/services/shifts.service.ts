@@ -202,7 +202,7 @@ export class ShiftsService {
       link.download = `downlaod.xlsx`;
       link.click();
       this.loadingService.setStatus(false);
-
+      return link
     } catch (error) {
       this.loadingService.setStatus(false);
     }
