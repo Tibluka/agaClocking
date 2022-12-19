@@ -190,4 +190,22 @@ export class ShiftsService {
     this.updateCalendarMonth();
   }
 
+  async downloadExcel() {
+    this.loadingService.setStatus(true);
+    const user = this.graphicsService.selectedUser;
+    try {
+      let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.month.getFullYear()}&month=${this.month.getMonth() + 1}&userId=${user}`).toPromise() as { base64: string };
+      base64 = base64.substr(2, base64.length - 3);
+      const source = `data:application/xlsx;base64,${base64}`;
+      const link = document.createElement("a");
+      link.href = source;
+      link.download = `downlaod.xlsx`;
+      link.click();
+      this.loadingService.setStatus(false);
+
+    } catch (error) {
+      this.loadingService.setStatus(false);
+    }
+  }
+
 }

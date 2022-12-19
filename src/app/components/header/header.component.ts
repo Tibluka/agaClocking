@@ -49,4 +49,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  download(){
+    this.shiftService.downloadExcel();
+  }
+
 }
