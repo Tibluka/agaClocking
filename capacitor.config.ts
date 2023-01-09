@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.example.app.v8',
+  appId: 'com.example.app.v9',
   appName: 'AgaClocking',
   webDir: 'www',
   bundledWebRuntime: false
