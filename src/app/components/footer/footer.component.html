@@ -3,7 +3,7 @@
         <div>
             Total
         </div>
-        <div *ngIf="currentRoute !== '/calendar'; else byMonth">
+        <div *ngIf="currentRoute === '/'; else byMonth">
             {{totalTime.hours}}:{{totalTime.minutes}}h
         </div>
         <ng-template #byMonth>
