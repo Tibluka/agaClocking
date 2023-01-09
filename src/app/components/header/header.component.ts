@@ -52,12 +52,17 @@ export class HeaderComponent implements OnInit {
 
   async download() {
     let url = await this.shiftService.downloadExcel();
-    await Share.share({
-      title: 'See cool stuff',
-      text: 'Really awesome thing you need to see right meow',
-      url: `${url}`,
-      dialogTitle: 'Share with buddies',
-    });
+
+    try {
+      await Share.share({
+        title: 'See cool stuff',
+        text: 'Really awesome thing you need to see right meow',
+        url: ``,
+        dialogTitle: 'Share with buddies',
+      });
+    } catch (error) {
+      url.click();
+    }
   }
 
 }

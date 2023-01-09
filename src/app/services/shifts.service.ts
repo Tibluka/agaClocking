@@ -200,7 +200,6 @@ export class ShiftsService {
       const link = document.createElement("a");
       link.href = source;
       link.download = `downlaod.xlsx`;
-      link.click();
       this.loadingService.setStatus(false);
       return link
     } catch (error) {
