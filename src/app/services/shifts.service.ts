@@ -196,12 +196,16 @@ export class ShiftsService {
     try {
       let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.month.getFullYear()}&month=${this.month.getMonth() + 1}&userId=${user}`).toPromise() as { base64: string };
       base64 = base64.substr(2, base64.length - 3);
-      const source = `data:application/xlsx;base64,${base64}`;
-      const link = document.createElement("a");
-      link.href = source;
-      link.download = `downlaod.xlsx`;
+      const byteCharacters = atob(base64);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'application/xlsx' });
+
       this.loadingService.setStatus(false);
-      return link
+      return blob;
     } catch (error) {
       this.loadingService.setStatus(false);
     }

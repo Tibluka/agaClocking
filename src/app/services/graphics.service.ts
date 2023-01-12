@@ -1,9 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { param } from 'jquery';
 import { environment } from 'src/environments/environment';
 import { User, Users } from '../models/graphics';
 import { Shift } from '../models/shifts';
 import { LoadingService } from './loading.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,10 @@ export class GraphicsService {
   private usersData: Users = new Users();
   private hoursByProjectData: Array<{ project: string, totalInMinutes: number }> = [];
   private selectedUserData = '';
+
+  get user() {
+    return this.userService.user;
+  }
 
   get selectedUser() {
     return this.selectedUserData;
@@ -46,24 +52,46 @@ export class GraphicsService {
   }
 
   constructor(private http: HttpClient,
-    private loadingService: LoadingService) { }
+    private loadingService: LoadingService,
+    private userService: UserService) {
+    const user = JSON.parse(localStorage.getItem('user_agaclocking'));
+    if (user) this.selectedUserData = user.id;
+  }
 
   async listUsers() {
     this.loadingService.setStatus(true);
-    this.usersData = await this.http.get(`${environment.url}/list-users`).toPromise() as any;
+    this.usersData = await this.http.get(`${environment.url}/list-users?userId=${this.selectedUser}`).toPromise() as any;
     this.loadingService.setStatus(false);
   }
 
-  async setChartByMonth(year: number, month: number) {
+  async setChartByMonth(year: number, month: number, userId?: number) {
     this.loadingService.setStatus(true);
 
-    const { hours } = await this.http.get(`${environment.url}/get-all-shifts-by-projects-month?year=${year}&month=${month}&userId=${this.selectedUser}`).toPromise() as any;
+    let params = new HttpParams()
+      .set('year', year)
+      .set('month', month)
+
+    if (userId) {
+      params = new HttpParams()
+        .set('year', year)
+        .set('month', month)
+        .set('userId', userId)
+    } else {
+      params = new HttpParams()
+        .set('year', year)
+        .set('month', month)
+        .set('userId', this.user.id)
+        .set('allProjects', true)
+    }
+
+    const { hours } =
+      await this.http.get(`${environment.url}/get-all-shifts-by-projects-month`, { params }).toPromise() as any;
     this.hoursByProjectData = hours;
 
     this.loadingService.setStatus(false);
   }
 
-  setSelectedUser(userId: string){
+  setSelectedUser(userId: string) {
     this.selectedUserData = userId;
   }
 

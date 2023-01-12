@@ -3,6 +3,7 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { User } from 'src/app/models/graphics';
 import { GraphicsService } from 'src/app/services/graphics.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-graphics',
@@ -11,11 +12,15 @@ import { ShiftsService } from 'src/app/services/shifts.service';
 })
 export class GraphicsComponent implements OnInit {
 
-  get selectedUser(){
+  get user() {
+    return this.userService.user;
+  }
+
+  get selectedUser() {
     return this.graphicsService.selectedUser;
   }
 
-  get users(){
+  get users() {
     return this.graphicsService.users;
   }
 
@@ -40,7 +45,8 @@ export class GraphicsComponent implements OnInit {
   }
 
   constructor(private graphicsService: GraphicsService,
-    private shiftsService: ShiftsService) {
+    private shiftsService: ShiftsService,
+    private userService: UserService) {
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
     this.graphicsService.listUsers();
   }
@@ -58,8 +64,11 @@ export class GraphicsComponent implements OnInit {
   }
 
   changeUser(event: any) {
-    this.graphicsService.setSelectedUser(event.target.value);
-    this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
+    this.graphicsService.setChartByMonth(
+      this.shiftMonth.getFullYear(),
+      this.shiftMonth.getMonth() + 1,
+      Number(event.target.value)
+    );
   }
 
 }

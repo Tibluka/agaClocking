@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
-import { Share } from '@capacitor/share';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-header',
@@ -51,18 +51,8 @@ export class HeaderComponent implements OnInit {
   }
 
   async download() {
-    let url = await this.shiftService.downloadExcel();
-
-    try {
-      await Share.share({
-        title: 'See cool stuff',
-        text: 'Really awesome thing you need to see right meow',
-        url: ``,
-        dialogTitle: 'Share with buddies',
-      });
-    } catch (error) {
-      url.click();
-    }
+    let blob = await this.shiftService.downloadExcel();
+    saveAs(blob, 'Download.xlsx');
   }
 
 }
