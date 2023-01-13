@@ -51,9 +51,7 @@ export class UpdateShiftComponent implements OnInit {
   constructor(private activeModal: NgbActiveModal,
     private shiftsService: ShiftsService) { }
 
-  ngOnInit(): void {
-    debugger
-  }
+  ngOnInit(): void { }
 
   cancel() {
     this.activeModal.close();
@@ -61,6 +59,13 @@ export class UpdateShiftComponent implements OnInit {
 
   async updateShift() {
     if (this.shiftForm.valid) {
+      const start = this.shiftForm.get('startShift').value;
+      const end = this.shiftForm.get('endShift').value;
+
+      if (moment(end).isBefore(start) && this.shiftForm.get('overnight').value === false) {
+        alert('Foi verificado que o horário de término do turno é inferior ao de início. Caso esteja correto, por favor marque a opção "Overnight".');
+        return
+      }
       if (this.shiftForm.get('overnight').value === true) {
         let nextDay = moment(this.shiftForm.get('endShift').value).add(1, 'days').format('YYYY-MM-DDTHH:mm:ss');
         this.shiftForm.get('endShift').setValue(nextDay);
