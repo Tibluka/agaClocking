@@ -60,7 +60,7 @@ export class GraphicsService {
 
   async listUsers() {
     this.loadingService.setStatus(true);
-    this.usersData = await this.http.get(`${environment.url}/list-users?userId=${this.selectedUser}`).toPromise() as any;
+    this.usersData = await this.http.get(`${environment.url}/list-users?userId=${this.user.id}`).toPromise() as any;
     this.loadingService.setStatus(false);
   }
 
@@ -89,10 +89,6 @@ export class GraphicsService {
     this.hoursByProjectData = hours;
 
     this.loadingService.setStatus(false);
-  }
-
-  setSelectedUser(userId: string) {
-    this.selectedUserData = userId;
   }
 
   toHoursAndMinutes(totalMinutes) {
