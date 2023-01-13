@@ -52,6 +52,7 @@ export class UpdateShiftComponent implements OnInit {
     private shiftsService: ShiftsService) { }
 
   ngOnInit(): void {
+    debugger
   }
 
   cancel() {

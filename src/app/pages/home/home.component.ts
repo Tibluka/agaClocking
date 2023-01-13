@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
   updateShift(shift: Shift) {
     const modal = this.ngbModal.open(UpdateShiftComponent, { size: 'md', centered: true });
     modal.componentInstance.shiftForm = new FormGroup({
-      endShift: new FormControl(moment(this.shiftDate).format('YYYY-MM-DDTHH:mm:ss')),
+      endShift: new FormControl(moment(shift.endShift ? shift.endShift : this.shiftDate).format('YYYY-MM-DDTHH:mm:ss')),
       startShift: new FormControl(moment(shift.startShift).format('YYYY-MM-DDTHH:mm:ss')),
       activity: new FormControl(shift.activity),
       shiftId: new FormControl(shift._id.$oid),
