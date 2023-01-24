@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">agaclocking</string>
-    <string name="title_activity_main">agaclocking</string>
-    <string name="package_name">com.example.app.v15</string>
-    <string name="custom_url_scheme">com.example.app.v15</string>
-</resources>
