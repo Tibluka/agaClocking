@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LoadingService {
-
   private loadingStatus: boolean = false;
 
   get status() {
@@ -17,4 +16,5 @@ export class LoadingService {
     this.loadingStatus = status;
     return status
   }
+
 }

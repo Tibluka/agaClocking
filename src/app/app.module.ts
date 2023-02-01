@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { Injectable, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { LoadingModule } from './components/loading/loading.module';
 import { NewShiftComponent } from './components/new-shift/new-shift.component';
 import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
 import { AuthGuardService } from './services/guards/auth-guard.service';
+import { InterceptorService } from './services/interceptor.service';
 
 registerLocaleData(localePt);
 
@@ -61,6 +62,11 @@ export class MyHammerConfig extends HammerGestureConfig {
     {
       provide: LOCALE_ID,
       useValue: 'pt-PT'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
