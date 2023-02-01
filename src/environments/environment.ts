@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://10.0.8.4:6001'
+  url: 'https://agaclocking.herokuapp.com'
 };
 
 /*
