@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://agaclocking.herokuapp.com'
+  url: 'https://agaclocking.onrender.com'
 };
 
 /*

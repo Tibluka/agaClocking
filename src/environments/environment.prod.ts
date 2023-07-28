@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'https://agaclocking.herokuapp.com'
+  url: 'https://agaclocking.onrender.com'
 };
