@@ -47,6 +47,9 @@ export class MyHammerConfig extends HammerGestureConfig {
           },
           {
             path: '', canActivate: [AuthGuardService], loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+          },
+          {
+            path: 'thanks', loadChildren: () => import('./pages/thanks/thanks.module').then(m => m.ThanksModule)
           }
 
         ]

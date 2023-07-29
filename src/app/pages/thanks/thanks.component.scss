@@ -1,0 +1,19 @@
+main {
+    position: relative;
+    height: 100vh;
+    p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 70px;
+        text-align: center;
+    }
+
+    .underlined {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 10px;
+    }
+}
