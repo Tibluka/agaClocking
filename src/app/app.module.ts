@@ -13,7 +13,7 @@ import { LoadingModule } from './components/loading/loading.module';
 import { NewShiftComponent } from './components/new-shift/new-shift.component';
 import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
 import { AuthGuardService } from './services/guards/auth-guard.service';
-import { InterceptorService } from './services/interceptor.service';
+import { InterceptorService } from './services/interceptor/interceptor.service';
 
 registerLocaleData(localePt);
 
