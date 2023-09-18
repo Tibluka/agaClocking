@@ -41,6 +41,9 @@ export class InterceptorService {
         if (error.error.message === 'Token expirado') {
           alert('Token expirado')
           this.router.navigate(['/login']);
+        } else if (error.error.message === 'Token inválido') {
+          alert('Token inválido')
+          this.router.navigate(['/login']);
         }
         throw error
       })
