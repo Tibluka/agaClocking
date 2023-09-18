@@ -39,6 +39,7 @@ export class InterceptorService {
         this.requestsOngoing.splice(index, 1);
         if (this.requestsOngoing.length === 0) this.loadingService.setStatus(false);
         if (error.error.message === 'Token expirado') {
+          alert('Token expirado')
           this.router.navigate(['/login']);
         }
         throw error
