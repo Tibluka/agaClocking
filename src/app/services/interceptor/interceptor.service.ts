@@ -10,7 +10,6 @@ import { LoadingService } from '../loading.service';
 export class InterceptorService {
 
   private requestsOngoing: Array<string> = [];
-  private countDelay: boolean = false;
 
   get loadingStatus() {
     return this.loadingService.status;
@@ -31,12 +30,20 @@ export class InterceptorService {
       request = request.clone({
         headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
       })
+    setTimeout(() => {
+      const requestStillPending = this.requestsOngoing.find(r => r === request.url);
+      if (requestStillPending) {
+        this.loadingService.setDelayedMessageStatus(true);
+      }
+    }, 10000);
     return next.handle(request).pipe(
       finalize(() => {
         this.requestsOngoing.splice(index, 1);
+        this.loadingService.setDelayedMessageStatus(false);
       }),
       catchError(error => {
         this.requestsOngoing.splice(index, 1);
+        this.loadingService.setDelayedMessageStatus(false);
         if (this.requestsOngoing.length === 0) this.loadingService.setStatus(false);
         if (error.error.message === 'Token expirado') {
           alert('Token expirado')
