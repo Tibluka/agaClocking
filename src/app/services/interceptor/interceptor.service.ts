@@ -35,7 +35,7 @@ export class InterceptorService {
       if (requestStillPending) {
         this.loadingService.setDelayedMessageStatus(true);
       }
-    }, 100);
+    }, 10000);
     return next.handle(request).pipe(
       finalize(() => {
         this.requestsOngoing.splice(index, 1);
