@@ -48,7 +48,7 @@ export class GraphicsComponent implements OnInit {
     private shiftsService: ShiftsService,
     private userService: UserService) {
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
-    this.graphicsService.listUsers();
+    this.graphicsService.listUsers(this.shiftsService.date);
   }
 
   ngOnInit(): void { }

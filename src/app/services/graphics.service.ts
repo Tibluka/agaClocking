@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User, Users } from '../models/graphics';
 import { Shift } from '../models/shifts';
 import { LoadingService } from './loading.service';
+import { ShiftsService } from './shifts.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -58,9 +59,12 @@ export class GraphicsService {
     if (user) this.selectedUserData = user.id;
   }
 
-  async listUsers() {
+  async listUsers(currentDate: Date) {
     this.loadingService.setStatus(true);
-    this.usersData = await this.http.get(`${environment.url}/list-users?userId=${this.user.id}`).toPromise() as any;
+    this.usersData = await
+      this.http
+        .get(`${environment.url}/list-users?userId=${this.user.id}&currentMonth=${currentDate.getMonth()}&currentYear=${currentDate.getFullYear()}`)
+        .toPromise() as any;
     this.loadingService.setStatus(false);
   }
 
