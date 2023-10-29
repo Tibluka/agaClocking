@@ -9,6 +9,7 @@
     </div>
     <div class="d-flex align-items-center">
         <img (click)="download()" src="../../../assets/icons/share-icon.svg" alt="">
-        <span *ngIf="user.userType && user.userType === 'ADMIN'" (click)="logout()">logout</span>
+        <img class="logout" src="../../../assets/icons/logout.svg" alt="" *ngIf="user.userType && user.userType === 'ADMIN'"
+            (click)="logout()">
     </div>
 </header>

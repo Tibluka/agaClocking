@@ -1,4 +1,4 @@
-<main>
+<main (swiperight)="previousShiftDate()" (swipeLeft)="nextShiftDate()">
     <div style="height: 80px;"></div>
 
     <div class="date-time d-flex align-items-center justify-content-between">
@@ -12,7 +12,8 @@
 
     <div class="body" *ngIf="shifts.length > 0; else noShifts">
         <div class="shifts" *ngFor="let shift of shifts; index as i">
-            <app-shift-item (deleteOutput)="deleteShift($event)" (updateOutput)="updateShift($event)" [index]="i" [shift]="shift"></app-shift-item>
+            <app-shift-item (deleteOutput)="deleteShift($event)" (updateOutput)="updateShift($event)" [index]="i"
+                [shift]="shift"></app-shift-item>
         </div>
     </div>
     <ng-template #noShifts>

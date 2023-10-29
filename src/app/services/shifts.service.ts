@@ -196,14 +196,23 @@ export class ShiftsService {
     try {
       let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.month.getFullYear()}&month=${this.month.getMonth() + 1}&userId=${user}`).toPromise() as { base64: string };
       base64 = base64.substr(2, base64.length - 3);
-      const byteCharacters = atob(base64);
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: 'application/xlsx' });
-
+      /*   debugger
+        const byteCharacters = atob(base64);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'application/xlsx' });
+   */
+      const blob = new Blob([base64], { type: 'application/octet-stream' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'nome_do_arquivo.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
       this.loadingService.setStatus(false);
       return blob;
     } catch (error) {
