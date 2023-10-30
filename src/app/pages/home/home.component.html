@@ -1,4 +1,4 @@
-<main (swiperight)="previousShiftDate()" (swipeLeft)="nextShiftDate()">
+<main>
     <div style="height: 80px;"></div>
 
     <div class="date-time d-flex align-items-center justify-content-between">
@@ -18,7 +18,8 @@
     </div>
     <ng-template #noShifts>
 
-        <div class="no-shifts d-flex flex-column justify-content-center align-items-center">
+        <div (swiperight)="previousShiftDate()" (swipeLeft)="nextShiftDate()"
+            class="no-shifts d-flex flex-column justify-content-center align-items-center">
             <img src="../../../assets/icons/alert-icon.svg" alt="">
             <div class="text-center">Nenhum ponto registrado</div>
         </div>
