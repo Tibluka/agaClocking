@@ -155,6 +155,8 @@ export class ShiftsService {
     })
     this.monthDays = days;
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
+    console.log(this.shiftMonth);
+    
   }
 
   async getTotalHoursByMonth(year: number, month: number) {
@@ -194,7 +196,7 @@ export class ShiftsService {
     this.loadingService.setStatus(true);
     const user = this.graphicsService.selectedUser;
     try {
-      let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.month.getFullYear()}&month=${this.month.getMonth() + 1}&userId=${user}`).toPromise() as { base64: string };
+      let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.shiftMonth.getFullYear()}&month=${this.shiftMonth.getMonth() + 1}&userId=${user}`).toPromise() as { base64: string };
       base64 = base64.substr(2, base64.length - 3);
       const byteCharacters = atob(base64);
       const byteNumbers = new Array(byteCharacters.length);

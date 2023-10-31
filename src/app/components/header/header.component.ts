@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 import { saveAs } from 'file-saver';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-header',
@@ -52,7 +53,7 @@ export class HeaderComponent implements OnInit {
 
   async download() {
     let blob = await this.shiftService.downloadExcel();
-    saveAs(blob, 'Download.xlsx');
+    saveAs(blob, `${moment(this.shiftMonth).format('MM-YYYY')}.xlsx`);
   }
 
 }
