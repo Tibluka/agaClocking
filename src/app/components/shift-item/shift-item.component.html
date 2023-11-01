@@ -1,14 +1,14 @@
 <div class="shift-parent" [ngStyle]="{'border-top': index === 0 ? '1px solid var(--borders)' : ''}">
     <div class="shift" (click)="updateShift()" (swiperight)="swipeRight()" (swipeLeft)="swipeLeft()"
         [ngClass]="{'enable-delete' : deleteState, 'overnight': shift.overnight}">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center text-start">
             <img *ngIf="shift.finished" src="../../../assets/icons/shift-finished-icon.svg" alt="">
             <img *ngIf="!shift.finished" src="../../../assets/icons/shift-initiated-icon.svg" alt="">
-            <span class="d-block ms-2">{{shift.project}}</span>
+            <span class="d-block ms-2 text-start">{{shift.project}}</span>
         </div>
-        <span>{{shift.startShift | date: 'HH:mm'}} <span *ngIf="shift.finished">às</span> {{ shift.endShift |
+        <span class="text-center">{{shift.startShift | date: 'HH:mm'}} <span *ngIf="shift.finished">às</span> {{ shift.endShift |
             date: 'HH:mm'}}</span>
-        <span>{{calculateDifference(shift)}}</span>
+        <span class="text-center">{{calculateDifference(shift)}}</span>
     </div>
     <div class="under-layer" (click)="deleteShift()">
         <img src="../../../assets/icons/trash-can-icon.svg" alt="">
