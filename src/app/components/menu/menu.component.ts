@@ -42,6 +42,7 @@ export class MenuComponent implements OnInit {
 
   constructor(private menuService: MenuService,
     private shiftsService: ShiftsService,
+    private router: Router,
     private userService: UserService) { }
 
   ngOnInit(): void {
