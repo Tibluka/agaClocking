@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loading.service';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
     private loginService: LoginService,
+    private userService: UserService,
     private loadingService: LoadingService) { }
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
       this.loadingService.setStatus(false);
       localStorage.setItem('user_agaclocking', JSON.stringify(access.user));
       localStorage.setItem('tkn_ack', access.token);
+      this.userService.setLoggedUser(access.user);
       this.router.navigate(['/']);
     }, err => {
       this.loadingService.setStatus(false);

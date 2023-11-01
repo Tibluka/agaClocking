@@ -15,4 +15,8 @@ export class UserService {
     const user = JSON.parse(localStorage.getItem('user_agaclocking'));
     if (user) this.userData = user;
   }
+
+  setLoggedUser(user) {
+    this.userData = user;
+  }
 }

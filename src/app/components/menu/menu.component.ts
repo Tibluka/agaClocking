@@ -33,6 +33,7 @@ export class MenuComponent implements OnInit {
   ]
 
   get loggedUser() {
+    debugger
     return this.userService.user;
   }
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
-import { ShiftsService } from 'src/app/services/shifts.service';
 import { saveAs } from 'file-saver';
 import * as moment from 'moment';
 import { MenuService } from 'src/app/services/menu.service';
+import { ShiftsService } from 'src/app/services/shifts.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,7 @@ import { MenuService } from 'src/app/services/menu.service';
 export class HeaderComponent implements OnInit {
 
   get user() {
-    return this.loginService.user;
+    return this.userService.user;
   }
 
   get currentRoute() {
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(private shiftService: ShiftsService,
-    private loginService: LoginService,
+    private userService: UserService,
     private menuService: MenuService,
     private router: Router) { }
 
