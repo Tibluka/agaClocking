@@ -1,0 +1,15 @@
+<main [ngClass]="{'active': menuState}">
+    <header>
+        <img (click)="close()" src="../../../assets/icons/close-icon.svg" alt="">
+        <div class="profile-info">
+            <h3>Olá, {{loggedUser.name}}</h3>
+            <p>Mês referência: {{date | date: 'MM/yyyy'}}</p>
+        </div>
+    </header>
+    <div class="content">
+        <div class="option" (click)="option.function()" *ngFor="let option of options">
+            <img src="../../../assets/icons/{{option.img}}" alt="">
+            <p>{{option.description}}</p>
+        </div>
+    </div>
+</main>

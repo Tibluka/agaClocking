@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 import { saveAs } from 'file-saver';
 import * as moment from 'moment';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-header',
@@ -31,8 +32,13 @@ export class HeaderComponent implements OnInit {
     return this.shiftService.month;
   }
 
+  get menuState() {
+    return this.menuService.state;
+  }
+
   constructor(private shiftService: ShiftsService,
     private loginService: LoginService,
+    private menuService: MenuService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -54,6 +60,10 @@ export class HeaderComponent implements OnInit {
   async download() {
     let blob = await this.shiftService.downloadExcel();
     saveAs(blob, `${moment(this.shiftMonth).format('MM-YYYY')}.xlsx`);
+  }
+
+  openMenu() {
+    this.menuService.setMenuState(!this.menuState);
   }
 
 }

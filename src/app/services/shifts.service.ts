@@ -14,9 +14,13 @@ export class ShiftsService {
 
   private shiftsData: Shifts = new Shifts();
   private shiftDate: Date = new Date();
-  private shiftMonth: Date = new Date();
+  private shiftMonthData: Date = new Date();
   private totalHoursByMonth: string = '0';
   private monthDays = [];
+
+  get shiftMonth() {
+    return this.shiftMonthData;
+  }
 
   get daysOfMonth() {
     return this.monthDays;
@@ -156,7 +160,7 @@ export class ShiftsService {
     this.monthDays = days;
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
     console.log(this.shiftMonth);
-    
+
   }
 
   async getTotalHoursByMonth(year: number, month: number) {
@@ -181,14 +185,14 @@ export class ShiftsService {
   nextShiftMonth() {
     let month = new Date(this.month);
     month.setMonth(month.getMonth() + 1);
-    this.shiftMonth = month;
+    this.shiftMonthData = month;
     this.updateCalendarMonth();
   }
 
   previousShiftMonth() {
     let month = new Date(this.month);
     month.setMonth(month.getMonth() - 1);
-    this.shiftMonth = month;
+    this.shiftMonthData = month;
     this.updateCalendarMonth();
   }
 
