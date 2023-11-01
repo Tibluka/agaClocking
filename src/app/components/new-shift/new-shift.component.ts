@@ -24,7 +24,7 @@ export class NewShiftComponent implements OnInit {
     userId: new FormControl('')
   });
 
-  get shiftDate(){
+  get shiftDate() {
     return this.shiftsService.date;
   }
 
@@ -63,8 +63,17 @@ export class NewShiftComponent implements OnInit {
 
   async addShift() {
     if (this.shiftForm.valid) {
+      if (this.shiftForm.get('activity').value.length < 10) {
+        alert('A descrição da atividade deve conter ao menos 10 caracteres.');
+        return;
+      }
       await this.shiftsService.addNewShift(this.shiftForm.value);
       this.activeModal.close();
+    } else {
+      for (let c in this.shiftForm.controls) {
+        this.shiftForm.controls[c].markAsTouched();
+      }
+      alert('Formulário inválido');
     }
   }
 
