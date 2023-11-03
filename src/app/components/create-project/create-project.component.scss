@@ -1,0 +1,31 @@
+main {
+    padding: 24px;
+    h3 {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+    form {
+        .form {
+            display: grid;
+            grid-template-areas:
+                "a a"
+                "b b";
+            gap: 12px;
+        }
+
+        .d-flex {
+            margin-top: 48px;
+        }
+        button {
+            padding: 6px 12px;
+            margin-left: 12px;
+        }
+    }
+}
+
+.a {
+    grid-area: a;
+}
+.b {
+    grid-area: b;
+}

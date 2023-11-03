@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { saveAs } from 'file-saver';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { CreateProjectComponent } from '../create-project/create-project.component';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +21,7 @@ export class MenuComponent implements OnInit {
   }
 
   get options() {
-    return [
+    let items = [
       {
         description: 'Baixar relatório mensal',
         img: 'share-icon.svg',
@@ -29,14 +30,14 @@ export class MenuComponent implements OnInit {
       },
       {
         description: 'Criar usuário',
-        img: 'logout.svg',
+        img: 'user-icon.svg',
         function: this.createUser,
         this: this,
         adminRequired: true
       },
       {
         description: 'Cadastrar projeto',
-        img: 'logout.svg',
+        img: 'project.svg',
         function: this.addProject,
         this: this,
         adminRequired: true
@@ -48,6 +49,10 @@ export class MenuComponent implements OnInit {
         this: this
       }
     ]
+    if (this.loggedUser.userType !== 'ADMIN') {
+      items = items.filter(m => !m.adminRequired);
+    }
+    return items;
   }
 
   get loggedUser() {
@@ -92,6 +97,7 @@ export class MenuComponent implements OnInit {
 
   addProject(this) {
     const component = this;
+    component.this.ngbModal.open(CreateProjectComponent);
 
   }
 

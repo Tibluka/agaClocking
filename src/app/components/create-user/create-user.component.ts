@@ -35,9 +35,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   async createUser() {
-    debugger
-    console.log(this.userForm);
-
     if (this.userForm.invalid) {
       alert('Formulário inválido')
       return;
@@ -47,10 +44,8 @@ export class CreateUserComponent implements OnInit {
   }
 
   addToSpecialRequests(event) {
-    debugger
-    console.log(event);
-    const specialRequests = this.userForm.get('specialRequests') as FormArray
-    specialRequests.push(new FormControl(event.value));
+    let specialRequests = this.userForm.get('specialRequests') as FormArray
+    specialRequests = new FormArray([new FormControl(event.value)]);
   }
 
 }

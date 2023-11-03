@@ -23,8 +23,13 @@ export class ProjectsService {
     this.loadingService.setStatus(false);
   }
 
-  addProject(){
-    
+  async addProject(project) {
+    try {
+      await this.http.post(`${environment.url}/add-project`, project).toPromise();
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
 }
