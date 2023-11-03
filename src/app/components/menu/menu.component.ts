@@ -5,6 +5,8 @@ import { MenuService } from 'src/app/services/menu.service';
 import { ShiftsService } from 'src/app/services/shifts.service';
 import { UserService } from 'src/app/services/user.service';
 import { saveAs } from 'file-saver';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateUserComponent } from '../create-user/create-user.component';
 
 @Component({
   selector: 'app-menu',
@@ -17,23 +19,38 @@ export class MenuComponent implements OnInit {
     return this.shiftsService.shiftMonth;
   }
 
-  options = [
-    {
-      description: 'Baixar relatório mensal',
-      img: 'share-icon.svg',
-      function: this.download,
-      this: this
-    },
-    {
-      description: 'Logout',
-      img: 'logout.svg',
-      function: this.logout,
-      this: this
-    }
-  ]
+  get options() {
+    return [
+      {
+        description: 'Baixar relatório mensal',
+        img: 'share-icon.svg',
+        function: this.download,
+        this: this
+      },
+      {
+        description: 'Criar usuário',
+        img: 'logout.svg',
+        function: this.createUser,
+        this: this,
+        adminRequired: true
+      },
+      {
+        description: 'Cadastrar projeto',
+        img: 'logout.svg',
+        function: this.addProject,
+        this: this,
+        adminRequired: true
+      },
+      {
+        description: 'Logout',
+        img: 'logout.svg',
+        function: this.logout,
+        this: this
+      }
+    ]
+  }
 
   get loggedUser() {
-    debugger
     return this.userService.user;
   }
 
@@ -44,6 +61,7 @@ export class MenuComponent implements OnInit {
   constructor(private menuService: MenuService,
     private shiftsService: ShiftsService,
     private router: Router,
+    private ngbModal: NgbModal,
     private userService: UserService) { }
 
   ngOnInit(): void {
@@ -65,6 +83,16 @@ export class MenuComponent implements OnInit {
     let blob = await component.this.shiftsService.downloadExcel();
     saveAs(blob, `${moment(this.date).format('MM-YYYY')}.xlsx`);
     component.this.close();
+  }
+
+  createUser(this) {
+    const component = this;
+    component.this.ngbModal.open(CreateUserComponent);
+  }
+
+  addProject(this) {
+    const component = this;
+
   }
 
 }

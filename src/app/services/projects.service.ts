@@ -22,4 +22,9 @@ export class ProjectsService {
     this.projectsData = await this.http.get(`${environment.url}/list-projects`).toPromise() as any;
     this.loadingService.setStatus(false);
   }
+
+  addProject(){
+    
+  }
+
 }

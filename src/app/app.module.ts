@@ -14,6 +14,8 @@ import { NewShiftComponent } from './components/new-shift/new-shift.component';
 import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
 import { AuthGuardService } from './services/guards/auth-guard.service';
 import { InterceptorService } from './services/interceptor/interceptor.service';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 registerLocaleData(localePt);
 
@@ -29,7 +31,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     NewShiftComponent,
     UpdateShiftComponent,
-    DeleteShiftComponent
+    DeleteShiftComponent,
+    CreateUserComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ export class MyHammerConfig extends HammerGestureConfig {
         ]
       }
     ]),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class UserService {
     return this.userData;
   }
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const user = JSON.parse(localStorage.getItem('user_agaclocking'));
     if (user) this.userData = user;
   }
@@ -19,4 +21,14 @@ export class UserService {
   setLoggedUser(user) {
     this.userData = user;
   }
+
+  async createUser(user) {
+    try {
+      await this.http.post(`${environment.url}/create-user`, user).toPromise();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
 }
