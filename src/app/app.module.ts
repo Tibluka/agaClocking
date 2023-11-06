@@ -8,14 +8,14 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as Hammer from 'hammerjs';
 import { AppComponent } from './app.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 import { DeleteShiftComponent } from './components/delete-shift/delete-shift.component';
 import { LoadingModule } from './components/loading/loading.module';
 import { NewShiftComponent } from './components/new-shift/new-shift.component';
 import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
 import { AuthGuardService } from './services/guards/auth-guard.service';
 import { InterceptorService } from './services/interceptor/interceptor.service';
-import { CreateUserComponent } from './components/create-user/create-user.component';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 registerLocaleData(localePt);
 

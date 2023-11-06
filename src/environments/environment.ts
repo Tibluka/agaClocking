@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://agaclocking.onrender.com/'
+  url: 'http://192.168.15.69:6002/'
 };
 
 /*

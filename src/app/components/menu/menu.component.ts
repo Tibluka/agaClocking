@@ -92,13 +92,14 @@ export class MenuComponent implements OnInit {
 
   createUser(this) {
     const component = this;
-    component.this.ngbModal.open(CreateUserComponent);
+    component.this.router.navigate(['/users']);
+    component.this.close();
   }
 
   addProject(this) {
     const component = this;
-    component.this.ngbModal.open(CreateProjectComponent);
-
+    component.this.router.navigate(['/projects']);
+    component.this.close();
   }
 
 }

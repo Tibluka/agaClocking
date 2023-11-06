@@ -1,0 +1,16 @@
+<div class="user-parent" [ngStyle]="{'border-top': index === 0 ? '1px solid var(--borders)' : ''}">
+    <div class="user" (click)="updateUser()" (swiperight)="swipeRight()" (swipeLeft)="swipeLeft()"
+        [ngClass]="{'enable-delete' : deleteState}">
+        <div class="d-flex align-items-center text-start">
+            <img src="../../../assets/icons/user.svg" alt="">
+            <span class="d-block ms-2 text-start">{{user.name}}</span>
+        </div>
+        <div></div>
+        <div class="d-flex align-items-center">
+            {{user.userType}}
+        </div>
+    </div>
+    <div class="under-layer" (click)="deleteUser()">
+        <img src="../../../assets/icons/trash-can-icon.svg" alt="">
+    </div>
+</div>

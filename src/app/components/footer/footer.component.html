@@ -1,5 +1,6 @@
 <footer>
-    <div class="total align-items-center d-flex justify-content-between">
+    <div class="total align-items-center d-flex justify-content-between"
+        *ngIf="currentRoute !== '/users' && currentRoute !== '/projects'">
         <div>
             Total
         </div>

@@ -8,6 +8,11 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   private userData: { id: number, name: string, userType: string } = null;
+  private userListData = [];
+
+  get userList() {
+    return this.userListData;
+  }
 
   get user() {
     return this.userData;
@@ -29,6 +34,13 @@ export class UserService {
     } catch (error) {
       return false;
     }
+  }
+
+  async listUsers() {
+    try {
+      const { users } = await this.http.get<any>(`${environment.url}/list-users`).toPromise();
+      this.userListData = users;
+    } catch (error) { }
   }
 
 }

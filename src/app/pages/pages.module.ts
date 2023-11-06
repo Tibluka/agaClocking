@@ -27,6 +27,12 @@ import { PagesComponent } from './pages.component';
           },
           {
             path: 'graphics', loadChildren: () => import('./graphics/graphics.module').then(m => m.GraphicsModule)
+          },
+          {
+            path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+          },
+          {
+            path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
           }
         ]
       }

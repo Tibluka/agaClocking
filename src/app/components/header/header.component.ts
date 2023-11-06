@@ -21,11 +21,21 @@ export class HeaderComponent implements OnInit {
     return location.pathname;
   }
   get viewType() {
-    if (this.currentRoute !== '/') {
-      return 'Mês'
-    } else {
-      return 'Dia'
+    switch (this.currentRoute) {
+      case '/':
+        return 'Dia';
+      case '/calendar':
+        return 'Mês';
+      case '/graphics':
+        return 'Gráficos';
+      case '/users':
+        return 'Usuários';
+      case '/projects':
+        return 'Projetos';
+      default:
+        return '';
     }
+
   }
 
   get shiftMonth() {

@@ -1,0 +1,21 @@
+main {
+    .user-list {
+        .user {
+            height: 80px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            border-bottom: 1px solid var(--gray-light);
+            h5 {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            img {
+                width: 32px;
+                margin-right: 12px;
+            }
+        }
+    }
+}

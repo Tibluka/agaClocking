@@ -63,7 +63,7 @@ export class GraphicsService {
     this.loadingService.setStatus(true);
     this.usersData = await
       this.http
-        .get(`${environment.url}/list-users?userId=${this.user.id}&currentMonth=${currentDate.getMonth()}&currentYear=${currentDate.getFullYear()}`)
+        .get(`${environment.url}/list-users-per-month?userId=${this.user.id}&currentMonth=${currentDate.getMonth()}&currentYear=${currentDate.getFullYear()}`)
         .toPromise() as any;
     this.loadingService.setStatus(false);
   }
