@@ -3,9 +3,9 @@
 <main class="p-2">
     <div class="form-group">
         <label for="user"></label>
-        <select (change)="changeUser($event)" [value]="selectedUser" name="user" class="form-select">
+        <select (change)="changeUser(selectedUser)" [(ngModel)]="selectedUser" name="user" class="form-select">
             <option value="">Todos os usuários</option>
-           <option *ngFor="let user of users" [value]="user.userId">{{user.name}}</option>
+           <option *ngFor="let user of users" [value]="user._id.$oid">{{user.name}}</option>
         </select>
     </div>
     <div class="projects d-flex mt-4">

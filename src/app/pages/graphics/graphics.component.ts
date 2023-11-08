@@ -12,16 +12,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class GraphicsComponent implements OnInit {
 
+  selectedUser: string = '';
+
   get user() {
     return this.userService.user;
   }
 
-  get selectedUser() {
-    return this.graphicsService.selectedUser;
-  }
-
   get users() {
-    return this.graphicsService.users;
+    return this.userService.userList;
   }
 
   get shiftMonth() {
@@ -47,6 +45,7 @@ export class GraphicsComponent implements OnInit {
   constructor(private graphicsService: GraphicsService,
     private shiftsService: ShiftsService,
     private userService: UserService) {
+    this.userService.listUsers();
     this.graphicsService.setChartByMonth(this.shiftMonth.getFullYear(), this.shiftMonth.getMonth() + 1);
     this.graphicsService.listUsers(this.shiftsService.date);
   }
@@ -63,11 +62,11 @@ export class GraphicsComponent implements OnInit {
     return `${this.graphicsService.toHoursAndMinutes(totalInMinutes).hours}:${zbm}${this.graphicsService.toHoursAndMinutes(totalInMinutes).minutes}h`
   }
 
-  changeUser(event: any) {
+  changeUser(selectedUserId: string) {
     this.graphicsService.setChartByMonth(
       this.shiftMonth.getFullYear(),
       this.shiftMonth.getMonth() + 1,
-      Number(event.target.value)
+      selectedUserId
     );
   }
 

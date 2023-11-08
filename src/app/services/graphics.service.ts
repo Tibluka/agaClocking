@@ -68,9 +68,9 @@ export class GraphicsService {
     this.loadingService.setStatus(false);
   }
 
-  async setChartByMonth(year: number, month: number, userId?: number) {
+  async setChartByMonth(year: number, month: number, userId?: string) {
     this.loadingService.setStatus(true);
-
+    debugger
     let params = new HttpParams()
       .set('year', year)
       .set('month', month)
@@ -84,8 +84,6 @@ export class GraphicsService {
       params = new HttpParams()
         .set('year', year)
         .set('month', month)
-        .set('userId', this.user.id)
-        .set('allProjects', true)
     }
 
     const { hours } =
