@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ChooseUserComponent implements OnInit {
 
-  selectedUserId: string = null;
+  selectedUser: string = null;
 
   get userList() {
     return this.userService.userList.filter(u => u.active && u.userType !== 'READER');
@@ -24,7 +24,11 @@ export class ChooseUserComponent implements OnInit {
   }
 
   confirm() {
-    this.ngbActiveModal.close(this.selectedUserId['_id'].$oid);
+    if (!this.selectedUser) {
+      alert('Selecione ao menos um usuário');
+      return;
+    }
+    this.ngbActiveModal.close(this.selectedUser['_id'].$oid);
   }
 
   close() {

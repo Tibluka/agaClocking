@@ -2,7 +2,7 @@
     <h3 class="mb-5">Selecione um usuário</h3>
 
     <div class="form-group">
-        <select [(ngModel)]="selectedUserId" name="selectedUserId" id="selectedUserId" class="form-select">
+        <select [(ngModel)]="selectedUser" name="selectedUser" id="selectedUser" class="form-select">
             <option [value]="null">Selecione</option>
             <option [ngValue]="user" *ngFor="let user of userList">{{user.name}}</option>
         </select>
