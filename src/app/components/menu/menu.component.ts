@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { CreateProjectComponent } from '../create-project/create-project.component';
+import { ChooseUserComponent } from '../choose-user/choose-user.component';
 
 @Component({
   selector: 'app-menu',
@@ -85,9 +86,25 @@ export class MenuComponent implements OnInit {
 
   async download(this) {
     const component = this;
-    let blob = await component.this.shiftsService.downloadExcel();
-    saveAs(blob, `${moment(this.date).format('MM-YYYY')}.xlsx`);
-    component.this.close();
+
+    if (component.this.loggedUser.userType === 'READER') {
+      component.this.close();
+      const modal = component.this.ngbModal.open(ChooseUserComponent, { size: 'md', centered: true });
+      modal.result.then(async (userId: string) => {
+        if (userId) {
+          const user = await component.this.userService.getUserById(userId);
+          let blob = await component.this.shiftsService.downloadExcel(userId);
+          saveAs(blob, `${moment(component.this.date).format('MM-YYYY')} - ${user.name}.xlsx`);
+          component.this.close();
+        }
+      })
+
+    } else {
+      let blob = await component.this.shiftsService.downloadExcel();
+      saveAs(blob, `${moment(component.this.date).format('MM-YYYY')} - ${component.this.loggedUser.name}.xlsx`);
+      component.this.close();
+    }
+
   }
 
   createUser(this) {

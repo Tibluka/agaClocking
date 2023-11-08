@@ -1,0 +1,19 @@
+<main>
+    <h3 class="mb-5">Selecione um usuário</h3>
+
+    <div class="form-group">
+        <select [(ngModel)]="selectedUserId" name="selectedUserId" id="selectedUserId" class="form-select">
+            <option [value]="null">Selecione</option>
+            <option [ngValue]="user" *ngFor="let user of userList">{{user.name}}</option>
+        </select>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <button class="secondary-btn me-3 pe-3 ps-3" (click)="close()">
+            Cancelar
+        </button>
+        <button class="primary-btn pe-3 ps-3" (click)="confirm()">
+            Confirmar
+        </button>
+    </div>
+</main>

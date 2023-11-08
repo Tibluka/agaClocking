@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/graphics';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,15 @@ export class UserService {
       const { users } = await this.http.get<any>(`${environment.url}/list-users`).toPromise();
       this.userListData = users;
     } catch (error) { }
+  }
+
+  async getUserById(userId) {
+    try {
+      const { user } = await this.http.get<{ user: User }>(`${environment.url}/get-user-by-id?userId=${userId}`).toPromise();
+      return user;
+    } catch (error) {
+      return null;
+    }
   }
 
 }

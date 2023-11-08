@@ -6,6 +6,11 @@ import { Injectable } from '@angular/core';
 export class LoadingService {
   private loadingStatus: boolean = false;
   private messageOnDelayedRequestsData: boolean = false;
+  private delayMessageTextData: string = 'Aguarde só mais um pouquinho. Estamos iniciando o servidor ;)';
+
+  get delayMessageText() {
+    return this.delayMessageTextData;
+  }
 
   get status() {
     return this.loadingStatus;

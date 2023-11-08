@@ -16,6 +16,7 @@ import { NewShiftComponent } from './components/new-shift/new-shift.component';
 import { UpdateShiftComponent } from './components/update-shift/update-shift.component';
 import { AuthGuardService } from './services/guards/auth-guard.service';
 import { InterceptorService } from './services/interceptor/interceptor.service';
+import { ChooseUserComponent } from './components/choose-user/choose-user.component';
 
 registerLocaleData(localePt);
 
@@ -33,13 +34,15 @@ export class MyHammerConfig extends HammerGestureConfig {
     UpdateShiftComponent,
     DeleteShiftComponent,
     CreateUserComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    ChooseUserComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     HammerModule,
+    FormsModule,
     LoadingModule,
     FormsModule,
     RouterModule.forRoot([

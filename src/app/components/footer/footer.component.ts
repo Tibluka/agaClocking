@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { Shift } from 'src/app/models/shifts';
 import { ShiftsService } from 'src/app/services/shifts.service';
+import { UserService } from 'src/app/services/user.service';
 import { NewShiftComponent } from '../new-shift/new-shift.component';
 
 @Component({
@@ -33,7 +34,12 @@ export class FooterComponent implements OnInit {
     return this.shiftsService.totalHoursMonth;
   }
 
+  get loggedUser() {
+    return this.userService.user;
+  }
+
   constructor(private modal: NgbModal,
+    private userService: UserService,
     private shiftsService: ShiftsService) { }
 
   ngOnInit(): void {

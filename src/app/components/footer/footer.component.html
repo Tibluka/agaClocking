@@ -14,6 +14,6 @@
         </ng-template>
     </div>
     <img class="graphics" routerLink="/graphics" src="../../../assets/icons/graphics-icon.svg" alt="">
-    <img (click)="newShift()" class="add-shift" src="../../../assets/icons/new-shift-icon.svg" alt="">
+    <img *ngIf="loggedUser.userType !== 'READER'" (click)="newShift()" class="add-shift" src="../../../assets/icons/new-shift-icon.svg" alt="">
     <img class="calendar" routerLink="/calendar" src="../../../assets/icons/calendar-icon.svg" alt="">
 </footer>

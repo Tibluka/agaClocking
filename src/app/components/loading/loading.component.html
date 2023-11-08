@@ -3,8 +3,7 @@
         <div *ngFor="let point of points"></div>
     </div>
     <div class="delayed-message" *ngIf="messageOnDelayedRequests">
-        <p>Aguarde só mais um pouquinho.</p>
-        <p>Estamos iniciando o servidor ;)</p>
+        <p [innerHTML]="delayMessageText"></p>
     </div>
 
 </div>

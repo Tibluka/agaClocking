@@ -196,11 +196,12 @@ export class ShiftsService {
     this.updateCalendarMonth();
   }
 
-  async downloadExcel() {
+  async downloadExcel(userId?: string) {
+
     this.loadingService.setStatus(true);
-    const user = this.graphicsService.selectedUser;
+
     try {
-      let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.shiftMonth.getFullYear()}&month=${this.shiftMonth.getMonth() + 1}&userId=${user}`).toPromise() as { base64: string };
+      let { base64 } = await this.http.get(`${environment.url}/download-shifts-by-month?year=${this.shiftMonth.getFullYear()}&month=${this.shiftMonth.getMonth() + 1}${userId ? `&userId=${userId}` : ''}`).toPromise() as { base64: string };
       base64 = base64.substr(2, base64.length - 3);
       const byteCharacters = atob(base64);
       const byteNumbers = new Array(byteCharacters.length);
