@@ -29,7 +29,6 @@ export class CreateProjectComponent implements OnInit {
   }
 
   async addProject() {
-    debugger
     if (this.projectForm.invalid) {
       alert('Formulário inválido')
       return;

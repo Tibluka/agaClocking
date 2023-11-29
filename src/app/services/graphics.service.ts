@@ -70,7 +70,6 @@ export class GraphicsService {
 
   async setChartByMonth(year: number, month: number, userId?: string) {
     this.loadingService.setStatus(true);
-    debugger
     let params = new HttpParams()
       .set('year', year)
       .set('month', month)

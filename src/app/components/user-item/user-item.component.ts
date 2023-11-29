@@ -25,7 +25,6 @@ export class UserItemComponent implements OnInit {
   }
 
   swipeRight() {
-    debugger
     this.deleteState = true;
   }
 
