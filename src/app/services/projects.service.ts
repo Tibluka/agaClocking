@@ -12,7 +12,12 @@ export class ProjectsService {
   private projectsData: Projects = new Projects();
 
   get projects() {
-    return this.projectsData.projects;
+    return this.projectsData.projects.sort((a, b) => {
+      if (a.dateHourCreated < b.dateHourCreated) {
+        return 1
+      }
+      return -1;
+    });
   }
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
