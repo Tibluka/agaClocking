@@ -1,0 +1,16 @@
+<div class="project-parent" [ngStyle]="{'border-top': index === 0 ? '1px solid var(--borders)' : ''}">
+    <div class="project" (click)="updateProject()" (swiperight)="swipeRight()" (swipeLeft)="swipeLeft()"
+        [ngClass]="{'enable-delete' : deleteState}">
+        <div class="d-flex align-items-center text-start">
+            <img src="../../../assets/icons/project.svg" alt="">
+            <span class="d-block ms-2 text-start">{{project.projectName}}</span>
+        </div>
+        <div></div>
+        <div class="d-flex align-items-center">
+            {{project.active ? 'Ativo' : 'Inativo'}}
+        </div>
+    </div>
+    <div class="under-layer" (click)="deleteProject()">
+        <img src="../../../assets/icons/trash-can-icon.svg" alt="">
+    </div>
+</div>

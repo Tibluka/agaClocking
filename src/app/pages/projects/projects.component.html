@@ -1,1 +1,7 @@
-<p>projects works!</p>
+<main>
+    <div style="height: 90px;"></div>
+
+    <div class="project-list">
+        <app-project-item (deleteOutput)="deleteUser($event)" *ngFor="let project of projectList" [project]="project"></app-project-item>
+    </div>
+</main>
