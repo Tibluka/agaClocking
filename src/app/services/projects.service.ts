@@ -17,7 +17,7 @@ export class ProjectsService {
         return 1
       }
       return -1;
-    });
+    }); 
   }
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
