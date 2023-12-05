@@ -1,0 +1,202 @@
+main {
+    h1 {
+        margin-bottom: 8px;
+    }
+
+    h4 {
+        margin-top: 32px;
+        margin-bottom: 24px;
+    }
+
+    .subtitle {
+        color: #808080;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    form {
+        margin-top: 32px;
+    }
+
+    .second-part {
+        margin-top: 24px;
+    }
+
+    .inputs {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        gap: 20px;
+
+        .item-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-item {
+            margin: 0;
+            position: relative;
+
+            .invalid-icon {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+            }
+
+            .close-input {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+                cursor: pointer;
+            }
+
+            &.dataSaidaConcessionaria {
+                .invalid-icon-date {
+                    position: absolute;
+                    top: 17px;
+                    right: 34px;
+                    cursor: pointer;
+                }
+
+                .close-input-date {
+                    position: absolute;
+                    top: 17px;
+                    right: 34px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .modelo {
+            min-width: 490px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .empresa,
+        .chassi {
+            min-width: 386px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .susep,
+        .anoModelo,
+        .anoFabricacao,
+        .qtdPortas {
+            min-width: 184px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .cpfCnpj,
+        .telefone,
+        .notaFiscal,
+        .numeroSerie {
+            min-width: 288px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .dataSaidaConcessionaria,
+        .marca,
+        .combustivel {
+            min-width: 284px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+
+        .nomeRazao {
+            min-width: 584px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .cotacao {
+            position: relative;
+            min-width: 284px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+
+            .obs {
+                position: absolute;
+                top: 54px;
+                left: 12px;
+                background-color: transparent;
+
+                label {
+                    z-index: -1;
+                }
+            }
+
+            .close-input {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+                background-color: transparent;
+
+                label {
+                    z-index: -1;
+                }
+            }
+        }
+    }
+
+    .down {
+        position: absolute;
+        top: 19px;
+        right: 12px;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 32px;
+        margin-top: 48px;
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .margin-icon {
+            margin-left: 8px;
+        }
+    }
+
+    .where {
+        color: var(--porto-seguro-holding-porto-seguro-100, #0046C0);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+        cursor: pointer;
+    }
+}

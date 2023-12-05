@@ -1,0 +1,99 @@
+main {
+
+    .obs {
+        color: var(--neutras-black-70, #5F5F5F);
+        font-family: Open Sans;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .inputs {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+
+        .checkbox-lg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .form-item {
+            margin: 0;
+        }
+
+        .alteracao,
+        .oferta {
+            min-width: 124px;
+            position: relative;
+            background-color: transparent;
+
+            .close-input {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+                cursor: pointer;
+            }
+            label {
+                z-index: -1;
+            }
+        }
+
+        .cotacao {
+            position: relative;
+            min-width: 284px;
+            background-color: transparent;
+
+            .obs {
+                position: absolute;
+                top: 54px;
+                left: 12px;
+            }
+
+            .close-input {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+                cursor: pointer;
+            }
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .checkbox {
+            margin: 16px 0;
+            color: var(--neutras-black-75, #404040);
+            font-size: 14px;
+            font-weight: 400;
+
+            label {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                font-weight: 400;
+            }
+        }
+
+    }
+
+    input[type="checkbox"] {
+        margin: 0 16px 0 0;
+    }
+
+    .button {
+        margin-top: 52px;
+
+        &.disabled {
+            button {
+                background: var(--neutras-black-15, #E0E0E0);
+                color: var(--neutras-black-60, #999);
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
+    }
+
+}

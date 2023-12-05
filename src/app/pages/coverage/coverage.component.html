@@ -1,0 +1,29 @@
+<main class="container">
+
+    <div class="header">
+        <div class="title-with-description">
+            <h1>Cobertura Provisória</h1>
+            <div class="subtitle">
+                <span class="description icon-margin">Solicite ou consulte serviço de cobertura provisória para veículos
+                    0
+                    km.</span>
+                <img (click)="openModalInfo()" src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/help.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab" *ngFor="let tab of tabs" (click)="changeTab(tab)"
+            [ngClass]="{'tab-active': tab.id === tabSelected}">
+            <span>{{tab.description}}</span>
+        </div>
+    </div>
+
+    <div class="dashboard-content-cards">
+        <container-element [ngSwitch]="tabSelected">
+            <app-request *ngSwitchCase="0"></app-request>
+            <app-consult *ngSwitchCase="1"></app-consult>
+        </container-element>
+    </div>
+
+</main>

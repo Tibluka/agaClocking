@@ -1,0 +1,297 @@
+<main class="container">
+    <h1>Solicitação</h1>
+
+    <div *ngIf="numeroCotacao" class="subtitle">Nº da cotação: {{numeroCotacao}}</div>
+
+    
+    <form [formGroup]="solicitationForm">
+        <div class="inputs">
+            <div class="empresa">
+                <app-custom-multiple-select [disabled]="solicitationForm.get('codigoEmpresa').disabled"
+                    class="custom-select" [bordered]="true" [options]="empresaOptions" [label]="'Empresa'"
+                    [type]="'SELECT'" [invalid]="empresaOptions[0].invalid" [titleGray]="true"
+                    (selectOptionEmitter)="updateForm($event)" [inicialValue]="populateCustomInput('codigoEmpresa')"
+                    [length]="empresaOptions.length">
+                </app-custom-multiple-select>
+                <span *ngIf="validateField(solicitationForm.get('codigoEmpresa'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+
+            <!--   <div class="susep">
+                <app-custom-multiple-select [disabled]="solicitationForm.get('corsus').disabled" class="custom-select"
+                    [bordered]="true" [options]="susepOptions" [label]="'SUSEP'" [type]="'SELECT'"
+                    [invalid]="susepOptions.length > 0 ? susepOptions[0].invalid : null" [titleGray]="true" (selectOptionEmitter)="updateForm($event)"
+                    [inicialValue]="populateCustomInput('corsus')" [length]="susepOptions.length">
+                </app-custom-multiple-select>
+                <span *ngIf="validateField(solicitationForm.get('corsus'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div> -->
+
+            <!--    <div class="susep">
+                <div class="form-item bordered susep"
+                    [ngClass]="{'label-active': solicitationForm.get('corsus').value || inputFocus['corsus'], 'invalid-form-field': validateField(solicitationForm.get('corsus'))}">
+                    <input type="text" formControlName="corsus" name="corsus" (focus)="onInputFocus('corsus')"
+                        (blur)="onInputBlur('corsus')">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('corsus'))}"
+                        for="corsus">SUSEP</label>
+                    <img *ngIf="validateField(solicitationForm.get('corsus'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg" alt="">
+                    <img (click)="clearField('corsus')" *ngIf="solicitationForm.get('corsus').value" class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg" alt="">
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('corsus'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div> -->
+        </div>
+
+        <h4>Dados do segurado</h4>
+
+        <div formGroupName="segurado" class="inputs">
+            <div class="bordered">
+                <div class="form-item bordered cpfCnpj"
+                    [ngClass]="{'label-active': solicitationForm.get('segurado.cgcOuCpf').value || inputFocus['segurado.cgcOuCpf'], 'invalid-form-field': validateField(solicitationForm.get('segurado.cgcOuCpf'))}">
+                    <input type="text" mask="000.000.000-00||00.000.000/0000-00" (focusout)="getPersonByCpfCnpj()"
+                        formControlName="cgcOuCpf" name="cgcOuCpf" (focus)="onInputFocus('segurado.cgcOuCpf')"
+                        (blur)="onInputBlur('segurado.cgcOuCpf')">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('segurado.cgcOuCpf'))}"
+                        for="cgcOuCpf">CPF/CNPJ</label>
+                    <img *ngIf="validateField(solicitationForm.get('segurado.cgcOuCpf'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                        alt="">
+                    <img (click)="clearField('segurado.cgcOuCpf')"
+                        *ngIf="solicitationForm.get('segurado.cgcOuCpf').value" class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                        alt="">
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('segurado.cgcOuCpf'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+                <span style="display: block;" *ngIf="personNotFound === true" class="invalid-text">CPF/CNPJ não encontrado.</span>
+            </div>
+
+            <div class="nomeRazao">
+                <div class="form-item bordered nomeRazao"
+                    [ngClass]="{'label-active': solicitationForm.get('segurado.nome').value || inputFocus['segurado.nome'],'invalid-form-field': validateField(solicitationForm.get('segurado.nome'))}">
+                    <input type="text" formControlName="nome" name="nome" (focus)="onInputFocus('segurado.nome')"
+                        (blur)="onInputBlur('segurado.nome')">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('segurado.nome'))}" for="nome">Nome
+                        / Razão Social</label>
+                    <img *ngIf="validateField(solicitationForm.get('segurado.nome'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                        alt="">
+                    <!--  <img (click)="clearField('segurado.nome')" *ngIf="solicitationForm.get('segurado.nome').value"
+                        class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                        alt=""> -->
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('segurado.nome'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+
+            <!--       <div class="telefone">
+                <div class="form-item bordered telefone"
+                    [ngClass]="{'label-active': solicitationForm.get('segurado.telefone').value || inputFocus['segurado.telefone'], 'invalid-form-field': validateField(solicitationForm.get('segurado.telefone'))}">
+                    <input type="text" mask="(00) 00000-0000 ||(00) 0000-0000" formControlName="telefone"
+                        (focus)="onInputFocus('segurado.telefone')" (blur)="onInputBlur('segurado.telefone')">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('segurado.telefone'))}"
+                        for="telefone">Telefone</label>
+                    <img *ngIf="validateField(solicitationForm.get('segurado.telefone'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg" alt="">
+                    <img (click)="clearField('segurado.telefone')"
+                        *ngIf="solicitationForm.get('segurado.telefone').value" class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg" alt="">
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('segurado.telefone'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+ -->
+        </div>
+
+        <h4>Dados do veículo</h4>
+
+        <div formGroupName="veiculo">
+            <div class="inputs">
+                <div class="chassi">
+                    <div class="form-item bordered chassi" [ngClass]="{'label-active': solicitationForm.get('veiculo.chassi').value || inputFocus['veiculo.chassi'], 
+                                'invalid-form-field': validateField(solicitationForm.get('veiculo.chassi'))}">
+                        <input type="text" formControlName="chassi" (focusout)="getVehicleDataByChassiNumber()"
+                            name="chassi" (focus)="onInputFocus('veiculo.chassi')"
+                            (blur)="onInputBlur('veiculo.chassi')">
+                        <label [ngClass]="{'invalid': validateField(solicitationForm.get('veiculo.chassi'))}"
+                            for="chassi">Chassi do veículo</label>
+                        <img *ngIf="validateField(solicitationForm.get('veiculo.chassi'))" class="invalid-icon"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                            alt="">
+                        <img (click)="clearField('veiculo.chassi')" *ngIf="solicitationForm.get('veiculo.chassi').value"
+                            class="close-input"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                            alt="">
+                    </div>
+                    <span *ngIf="validateField(solicitationForm.get('veiculo.chassi'))" class="invalid-text">Campo
+                        obrigatório/inválido.</span>
+                </div>
+
+                <div class="modelo">
+                    <div class="form-item bordered modelo" [ngClass]="{'label-active': solicitationForm.get('veiculo.marcaModelo').value || inputFocus['veiculo.marcaModelo'], 
+                    'invalid-form-field': validateField(solicitationForm.get('veiculo.marcaModelo'))}">
+                        <input type="text" formControlName="marcaModelo" name="modelo"
+                            (focus)="onInputFocus('veiculo.marcaModelo')" (blur)="onInputBlur('veiculo.marcaModelo')">
+                        <label [ngClass]="{'invalid': validateField(solicitationForm.get('veiculo.marcaModelo'))}"
+                            for="marcaModelo">Marca/Modelo</label>
+                        <img *ngIf="validateField(solicitationForm.get('veiculo.marcaModelo'))" class="invalid-icon"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                            alt="">
+                        <!-- <img (click)="clearField('veiculo.marcaModelo')"
+                            *ngIf="solicitationForm.get('veiculo.marcaModelo').value" class="close-input"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                            alt=""> -->
+                    </div>
+                    <span *ngIf="validateField(solicitationForm.get('veiculo.marcaModelo'))" class="invalid-text">Campo
+                        obrigatório/inválido.</span>
+                </div>
+
+            </div>
+
+            <div class="inputs second-part">
+                <div class="anoModelo">
+                    <div class="form-item bordered anoModelo" [ngClass]="{'label-active': solicitationForm.get('veiculo.anoModelo').value || inputFocus['veiculo.anoModelo'], 
+                    'invalid-form-field': validateField(solicitationForm.get('veiculo.anoModelo'))}">
+                        <input type="text" formControlName="anoModelo" name="anoModelo"
+                            (focus)="onInputFocus('veiculo.anoModelo')" (blur)="onInputBlur('veiculo.anoModelo')">
+                        <label [ngClass]="{'invalid': validateField(solicitationForm.get('veiculo.anoModelo'))}"
+                            for="anoModelo">Ano modelo</label>
+                        <img *ngIf="validateField(solicitationForm.get('veiculo.anoModelo'))" class="invalid-icon"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                            alt="">
+                        <!-- <img (click)="clearField('veiculo.anoModelo')"
+                            *ngIf="solicitationForm.get('veiculo.anoModelo').value" class="close-input"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                            alt=""> -->
+                    </div>
+                    <span *ngIf="validateField(solicitationForm.get('veiculo.anoModelo'))" class="invalid-text">Campo
+                        obrigatório/inválido.</span>
+                </div>
+
+                <div class="qtdPortas">
+                    <div class="form-item bordered qtdPortas"
+                        [ngClass]="{'label-active': solicitationForm.get('veiculo.quantidadePortas').value || inputFocus['veiculo.quantidadePortas'], 'invalid-form-field': validateField(solicitationForm.get('veiculo.quantidadePortas'))}">
+                        <input type="text" formControlName="quantidadePortas" name="quantidadePortas"
+                            (focus)="onInputFocus('veiculo.quantidadePortas')"
+                            (blur)="onInputBlur('veiculo.quantidadePortas')">
+                        <label [ngClass]="{'invalid': validateField(solicitationForm.get('veiculo.quantidadePortas'))}"
+                            for="quantidadePortas">Qtd. Portas</label>
+                        <img *ngIf="validateField(solicitationForm.get('veiculo.quantidadePortas'))"
+                            class="invalid-icon"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                            alt="">
+                        <!--  <img (click)="clearField('veiculo.quantidadePortas')"
+                            *ngIf="solicitationForm.get('veiculo.quantidadePortas').value" class="close-input"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                            alt=""> -->
+                    </div>
+                    <span *ngIf="validateField(solicitationForm.get('veiculo.quantidadePortas'))"
+                        class="invalid-text">Campo
+                        obrigatório/inválido.</span>
+                </div>
+
+                <div class="combustivel">
+                    <div class="form-item bordered combustivel"
+                        [ngClass]="{'label-active': solicitationForm.get('veiculo.combustivel').value || inputFocus['veiculo.combustivel'], 'invalid-form-field': validateField(solicitationForm.get('veiculo.combustivel'))}">
+                        <input type="text" formControlName="combustivel" name="combustivel"
+                            (focus)="onInputFocus('veiculo.combustivel')" (blur)="onInputBlur('veiculo.combustivel')">
+                        <label [ngClass]="{'invalid': validateField(solicitationForm.get('veiculo.combustivel'))}"
+                            for="combustivel">Combustível</label>
+                        <img *ngIf="validateField(solicitationForm.get('veiculo.combustivel'))" class="invalid-icon"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                            alt="">
+                        <!--  <img (click)="clearField('veiculo.combustivel')"
+                            *ngIf="solicitationForm.get('veiculo.combustivel').value" class="close-input"
+                            src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                            alt=""> -->
+                    </div>
+                    <span *ngIf="validateField(solicitationForm.get('veiculo.combustivel'))" class="invalid-text">Campo
+                        obrigatório/inválido.</span>
+                </div>
+            </div>
+        </div>
+
+        <h4>Informações complementares</h4>
+
+        <div class="inputs">
+            <div class="notaFiscal">
+                <div class="form-item bordered notaFiscal" [ngClass]="{'label-active': solicitationForm.get('numeroNotaFiscal').value || inputFocus['numeroNotaFiscal'], 
+                'invalid-form-field': validateField(solicitationForm.get('numeroNotaFiscal'))}">
+                    <input type="text" maxlength="8" mask="0*" formControlName="numeroNotaFiscal"
+                        name="numeroNotaFiscal" (focus)="onInputFocus('numeroNotaFiscal')"
+                        (blur)="onInputBlur('numeroNotaFiscal')">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('numeroNotaFiscal'))}"
+                        for="numeroNotaFiscal">Nº da Nota Fiscal</label>
+                    <img *ngIf="validateField(solicitationForm.get('numeroNotaFiscal'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                        alt="">
+                    <img (click)="clearField('numeroNotaFiscal')" *ngIf="solicitationForm.get('numeroNotaFiscal').value"
+                        class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                        alt="">
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('numeroNotaFiscal'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+
+            <div class="numeroSerie">
+                <div class="form-item bordered numeroSerie" [ngClass]="{'label-active': solicitationForm.get('serieNotaFiscal').value || inputFocus['serieNotaFiscal'], 
+                'invalid-form-field': validateField(solicitationForm.get('serieNotaFiscal'))}">
+                    <input type="text" mask="0*" formControlName="serieNotaFiscal" name="serieNotaFiscal"
+                        (focus)="onInputFocus('serieNotaFiscal')" (blur)="onInputBlur('serieNotaFiscal')">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('serieNotaFiscal'))}"
+                        for="serieNotaFiscal">Nº de Série</label>
+                    <img *ngIf="validateField(solicitationForm.get('serieNotaFiscal'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                        alt="">
+                    <img (click)="clearField('serieNotaFiscal')" *ngIf="solicitationForm.get('serieNotaFiscal').value"
+                        class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                        alt="">
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('serieNotaFiscal'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+
+            <div>
+                <div class="form-item bordered dataSaidaConcessionaria label-active"
+                    [ngClass]="{'invalid-form-field': validateField(solicitationForm.get('dataSaidaConcessionaria'))}">
+                    <input type="date" formControlName="dataSaidaConcessionaria" name="dataSaidaConcessionaria"
+                        [min]="today">
+                    <label [ngClass]="{'invalid': validateField(solicitationForm.get('dataSaidaConcessionaria'))}"
+                        for="dataSaidaConcessionaria">Data saída da concessionária</label>
+                    <img *ngIf="validateField(solicitationForm.get('dataSaidaConcessionaria'))"
+                        class="invalid-icon-date"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                        alt="">
+                    <img (click)="clearField('dataSaidaConcessionaria')"
+                        *ngIf="solicitationForm.get('dataSaidaConcessionaria').value" class="close-input-date"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                        alt="">
+                </div>
+                <span *ngIf="validateField(solicitationForm.get('dataSaidaConcessionaria'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+
+        </div>
+
+        <div class="where" (click)="openModal()">
+            <img class="icon-margin"
+                src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/help.svg"
+                alt="">
+            <span>Onde fica o número e a série da nota fiscal?</span>
+        </div>
+        <div class="buttons">
+            <button (click)="cancel()" class="secondary-btn no-border">
+                <div class="margin-icon">Cancelar</div>
+            </button>
+            <button (click)="confirm()" class="primary-btn">
+                <div>Concluir solicitação</div>
+            </button>
+        </div>
+    </form>
+
+</main>

@@ -1,0 +1,41 @@
+<main>
+    <img src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/check.svg" alt="">
+    <div class="large">
+        Cobertura Provisória
+        solicitada com sucesso! </div>
+
+    <div class="serial-number">
+        <div>Nº {{modalContent.numeroCobertura}} </div>
+        <img class="c-p" (click)="copyToClipboard(modalContent.numeroCobertura)" src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/copy.svg" alt="">
+    </div>
+
+    <div class="text">
+        <div>Utilize este número para consultar e acompanhar a solicitação.</div>
+    </div>
+
+    <div [hidden]="showInputEmail == true" class="buttons">
+<!--         <div class="side-to-side">
+            <button (click)="showInputEmail = true" class="secondary-btn">
+                <img class="icon-margin" src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/email.svg" alt="">
+                <div class="margin-icon">E-mail</div>
+            </button>
+            <button class="secondary-btn">
+                <img class="icon-margin" src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/whatsapp.svg" alt="">
+                <div class="margin-icon">Whatsapp</div>
+            </button>
+        </div> -->
+        <button (click)="close()" class="primary-btn"> Fechar</button>
+    </div>
+<!-- 
+    <div *ngIf="showInputEmail" class="input-email">
+        <div class="form-item bordered email" [ngClass]="{'label-active': email !== ''}">
+            <label for="email">E-mail para envio</label>
+            <input type="text" [(ngModel)]="email">
+        </div>
+        <button class="primary-btn">
+            <img class="icon-margin" src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/email.svg" alt="">
+            <div> Enviar e-mail</div>
+        </button>
+        <button (click)="showInputEmail = false" class="secondary-btn no-border">Voltar</button>
+    </div> -->
+</main>

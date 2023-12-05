@@ -1,0 +1,42 @@
+main {
+    .loading-style {
+        height: 100vh;
+        position: fixed;
+        background: gray;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+        opacity: 0.5;
+    }
+
+    .spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 35px;
+        height: 35px;
+
+        img {
+            width: 35px;
+            height: 35px;
+            animation: rotate 1s linear infinite;
+            /* Aqui, 2s define a duração da animação */
+        }
+    }
+}
+
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        /* Comece com a imagem sem rotação (0 graus) */
+    }
+
+    100% {
+        transform: rotate(360deg);
+        /* Gire a imagem em 360 graus para fazer uma rotação completa */
+    }
+}

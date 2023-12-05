@@ -1,0 +1,6 @@
+<main [ngClass]="{'side-slide': modalContent?.sideSlide}">
+    <div class="modal-content {{modalContent?.class}}"
+        [ngStyle]="{'width': modalContent?.sideSlide ? '544px' : ''}" [ngClass]="{'transition': transition}">
+        <ng-container *ngComponentOutlet="component"></ng-container>
+    </div>
+</main>

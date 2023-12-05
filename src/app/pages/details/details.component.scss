@@ -1,0 +1,98 @@
+main {
+    h1 {
+        margin-bottom: 32px;
+    }
+
+    .dados-solicitacao,
+    .dados-veiculo,
+    .dados-segurado,
+    .informacoes-complementares {
+
+        h4 {
+            margin-bottom: 24px;
+        }
+
+        button {
+            margin-top: 16px;
+        }
+
+        .solicitacao,
+        .veiculo,
+        .segurado,
+        .informacoes {
+            display: flex;
+            margin-bottom: 16px;
+            align-items: center;
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                margin-right: 32px;
+
+                label {
+                    margin-bottom: 4px;
+                    color: var(--neutras-black-85, #1F1F1F);
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 130%;
+                }
+
+                .result {
+                    color: var(--neutras-black-85, #1F1F1F);
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 130%;
+                }
+            }
+
+            .status {
+                border-radius: 8px;
+                display: flex;
+                padding: 4px 8px;
+                justify-content: center;
+                align-items: center;
+                font-size: 12px;
+                font-weight: 700;
+                height: 100%;
+
+                &.paid {
+                    background: var(--paleta-estendida-green-green-30, #c0f0d3);
+                    color: var(--paleta-estendida-green-green-100, #034d2e);
+                }
+
+                &.analysis {
+                    background: var(--paleta-estendida-yellow-yellow-30, #f8f6c2);
+                    color: var(--paleta-estendida-yellow-yellow-100, #94621f);
+                }
+
+                &.doc-pending {
+                    background: var(--paleta-estendida-violet-violet-30, #dbc7ff);
+                    color: var(--paleta-estendida-violet-violet-100, #48316d);
+                }
+
+                &.refused {
+                    background: var(--paleta-estendida-red-red-30, #ffcdc6);
+                    color: var(--paleta-estendida-red-red-100, #842310);
+                }
+            }
+        }
+    }
+
+    .informacoes-complementares {
+        .informacoes {
+            table {
+                border-radius: 4px;
+            }
+        }
+    }
+
+    .situacao-solicitacao {
+        h4 {
+            margin-bottom: 16px;
+        }
+    }
+}
+
+hr {
+    margin: 32px 0;
+}

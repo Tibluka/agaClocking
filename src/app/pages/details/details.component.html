@@ -1,0 +1,116 @@
+<main class="container">
+    <h1>Detalhes da solicitação</h1>
+    <div class="dados-solicitacao">
+        <h4>Dados da solicitação</h4>
+        <div class="solicitacao">
+            <div class="item">
+                <label for="">Nº solicitação</label>
+                <div class="result">{{details[0]?.numeroCoberturaProvisoria}}</div>
+            </div>
+            <div class="item">
+                <label for="">Data da solicitação</label>
+                <div class="result">{{details[0]?.dataSolicitacao | date: 'dd/MM/yyyy'}}</div>
+            </div>
+            <!--   <div class="item">
+                <label for="">Expira em</label>
+                <div class="result">??</div>
+            </div> -->
+            <!--             <div class="status refused">Cancelado</div>
+ -->
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="dados-segurado">
+        <h4>Dados do segurado</h4>
+        <div class="segurado">
+            <div class="item">
+                <label for="">CPF / CNPJ</label>
+                <div class="result"> {{cpfCnpj | mask: '000.000.000-00' || '00.000.000/0000-00'}} </div>
+            </div>
+            <div class="item">
+                <label for="">Nome / Razão Social</label>
+                <div class="result">{{details[0]?.segurado.nome}}</div>
+            </div>
+            <!--         <div class="item">
+                <label for="">Telefone</label>
+                <div class="result">??</div>
+            </div> -->
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="dados-veiculo">
+        <h4>Dados do veículo</h4>
+        <div class="veiculo">
+            <div class="item">
+                <label for="">Chassi</label>
+                <div class="result">{{details[0]?.veiculo.inicialNumeroChassi}} {{details[0]?.veiculo.finalNumeroChassi}}
+                </div>
+            </div>
+            <div class="item">
+                <label for="">Marca</label>
+                <div class="result">{{details[0]?.veiculo.nomeMarca}}</div>
+            </div>
+            <div class="item">
+                <label for="">Modelo</label>
+                <div class="result">{{details[0]?.veiculo.nomeTipo}} {{details[0]?.veiculo.nomeModelo}}</div>
+            </div>
+            <div class="item">
+                <label for="">Ano modelo</label>
+                <div class="result">{{details[0]?.veiculo.anoModelo}}</div>
+            </div>
+            <div class="item">
+                <label for="">Qtd. parcelas</label>
+                <div class="result">{{details[0]?.veiculo.qtdePortas}}</div>
+            </div>
+            <div class="item">
+                <label for="">Combustível</label>
+                <div class="result">{{details[0]?.veiculo.combustivel}}</div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="informacoes-complementares">
+        <h4>Informações complementares</h4>
+        <div class="informacoes">
+            <div class="item">
+                <label for="">Nº da Nota Fiscal</label>
+                <div class="result">{{details[0]?.numeroNotaFiscal}}</div>
+            </div>
+            <!--             <div class="item">
+                <label for="">Nº de série</label>
+                <div class="result">??</div>
+            </div> -->
+            <div class="item">
+                <label for="">Data saída da concessionária</label>
+                <div class="result">{{details[0]?.dataSaidaVeiculoConcessionaria | date: 'dd/MM/yyyy'}}</div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="situacao-solicitacao">
+        <h4>Situação da solicitação</h4>
+
+        <table>
+            <tr>
+                <th class="d-flex">Status</th>
+                <th class="d-flex">Data</th>
+            </tr>
+            <tr>
+                <td>
+                    <div>{{details[0]?.descricaoSituacaoCoberturaProvisoria}}</div>
+                </td>
+                <td>
+                    <div>{{details[0]?.dataSolicitacao | date: 'dd/MM/YYYY'}}</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>

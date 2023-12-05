@@ -1,0 +1,111 @@
+<main class="container">
+    <form [formGroup]="consultForm">
+        <div class="inputs">
+            <div class="tipoBusca">
+                <app-custom-multiple-select class="custom-select" [bordered]="true" [options]="tipoBuscaOptions"
+                    [label]="'Tipo de busca'" [type]="'SELECT'" [invalid]="tipoBuscaOptions[0].invalid"
+                    (selectOptionEmitter)="updateForm($event)"
+                    [ngClass]="{'label-active': consultForm.get('tipoBusca').value !== ''}">
+                </app-custom-multiple-select>
+            </div>
+
+            <div class="busca">
+                <div *ngIf="consultForm.get('tipoBusca').value !== 'dataSaidaConcessionaria'"
+                    class="form-item bordered busca"
+                    [ngClass]="{'label-active': consultForm.get('busca').value || inputFocus['busca'], 'invalid-form-field': validateField(consultForm.get('busca'))}">
+                    <input type="text" formControlName="busca" (focusout)="formInputTag('busca')"
+                        (focus)="onInputFocus('busca')" (blur)="onInputBlur('busca')">
+                    <label [ngClass]="{'invalid': validateField(consultForm.get('busca'))}" for="busca">Busca</label>
+                    <img *ngIf="validateField(consultForm.get('busca'))" class="invalid-icon"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/invalid.svg"
+                        alt="">
+                    <img (click)="clearField('busca')" *ngIf="consultForm.get('busca').value" class="close-input"
+                        src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg"
+                        alt="">
+                </div>
+                <span *ngIf="validateField(consultForm.get('busca'))" class="invalid-text">Campo
+                    obrigatório/inválido.</span>
+            </div>
+
+
+            <div *ngIf="consultForm.get('tipoBusca').value == 'dataSaidaConcessionaria'" class="inputs">
+                <div class="form-item bordered dataSaidaConcessionaria label-active">
+                    <input type="date" [(ngModel)]="dataInicioReferencia" [ngModelOptions]="{standalone: true}"
+                        name="dataInicioReferencia">
+                    <label for="dataInicioReferencia">Data início</label>
+                </div>
+
+                <div class="form-item bordered dataSaidaConcessionaria label-active">
+                    <input type="date" [(ngModel)]="dataFinalReferencia" [ngModelOptions]="{standalone: true}"
+                        name="dataFinalReferencia">
+                    <label for="dataFinalReferencia">Data final</label>
+                </div>
+
+            </div>
+
+            <div class="button">
+                <button (click)="search()" class="primary-btn">Pesquisar</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div *ngIf="listActive.length ==  0" class="no-results">
+        <img src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/lupa.svg"
+            alt="">
+        <div class="title">Nenhum resultado por aqui</div>
+        <div class="subtitle">Utilize a pesquisa para exibir os resultados</div>
+    </div>
+
+    <div *ngIf="listActive.length > 0" class="with-results">
+        <div class="results">
+            <h3>Resultados</h3>
+            <span
+                *ngIf="consultForm.get('tipoBusca').value !== 'dataSaidaConcessionaria' || (consultForm.get('tipoBusca').value == 'dataSaidaConcessionaria' && consultForm.get('busca').value == '')"
+                class="period">Período de
+                consulta de {{yearAgo | date: 'dd/MM/yyyy'}} a {{today | date: 'dd/MM/yyyy'}}</span>
+            <span
+                *ngIf="consultForm.get('tipoBusca').value == 'dataSaidaConcessionaria' && consultForm.get('busca').value !== ''"
+                class="period">Período de
+                consulta de {{dataInicioReferencia | date: 'dd/MM/yyyy'}} a {{dataFinalReferencia | date:
+                'dd/MM/yyyy'}}</span>
+        </div>
+
+        <table>
+            <tr>
+                <th class="d-flex w-10">Nº cobertura</th>
+                <th class="d-flex w-30">Empresa</th>
+                <th class="d-flex w-30">Modelo</th>
+                <th class="d-flex w-10">SUSEP</th>
+                <th class="d-flex w-10">Solicitação</th>
+                <th class="d-flex w-10">Status</th>
+            </tr>
+            <tr *ngFor="let item of listActive">
+                <td class="cobertura w-10"
+                    (click)="navigate(item.numeroCoberturaProvisoria, item.codigoSusep, item.codigoSituacaoCoberturaProvisoria)">
+                    <div>{{item.numeroCoberturaProvisoria}}</div>
+                </td>
+                <td class="w-30">
+                    <div>{{item.nomeEmpresa}}</div>
+                </td>
+                <td class="w-30">
+                    <div>
+                        <span> {{item.veiculo.nomeMarca}}</span>
+                        <span> {{item.veiculo.nomeTipo}}</span>
+                        <span> {{item.veiculo.nomeModelo}}</span>
+                    </div>
+                </td>
+                <td class="w-10">
+                    <div>{{item.codigoSusep}}</div>
+                </td>
+                <td class="w-10">
+                    <div>{{item.dataSolicitacao | date: 'dd/MM/yyyy'}}</div>
+                </td>
+                <td class="w-10">
+                    {{item.descricaoSituacaoCoberturaProvisoria}}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</main>

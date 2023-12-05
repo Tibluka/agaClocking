@@ -1,0 +1,178 @@
+main {
+
+    .inputs {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        gap: 20px;
+
+        .form-item {
+            margin: 0;
+            position: relative;
+
+            .invalid-icon {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+            }
+
+            .close-input {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+                cursor: pointer;
+            }
+        }
+
+        .tipoBusca {
+            min-width: 281px;
+        }
+
+        .busca {
+            min-width: 310px;
+            background-color: transparent;
+
+            label {
+                z-index: -1;
+            }
+        }
+
+        .dataSaidaConcessionaria {
+            min-width: 210px;
+        }
+    }
+
+    .no-results {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            padding: 24px;
+            width: 64px;
+            height: 64px;
+            margin: 60px 0 32px 0;
+        }
+
+        .title {
+            color: var(--body, #747474);
+            text-align: center;
+            /*             font-family: Porto Roobert;
+ */
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 28px;
+            /* 116.667% */
+        }
+
+        .subtitle {
+            color: var(--body, #747474);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 44px;
+            /* 275% */
+        }
+    }
+
+    .with-results {
+        margin-top: 48px;
+
+        .results {
+            margin-bottom: 16px;
+
+            h5 {
+                margin: 48px 0 0 0;
+            }
+
+            .period {
+                color: #808080;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                margin: 4px 0 16px 0;
+            }
+        }
+
+        table {
+            border-radius: 4px;
+
+            tr {
+                width: 100%;
+
+                .w-10 {
+                    width: 10%;
+                }
+
+                .w-30 {
+                    width: 30%;
+                }
+
+            }
+        }
+
+        .cobertura {
+            color: var(--seguros-porto-seguros-100, #0046C0);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            cursor: pointer;
+            text-decoration-line: underline;
+        }
+
+        .selecionar {
+            display: flex;
+            cursor: pointer;
+        }
+
+        .img-icon {
+            margin-left: 4px;
+        }
+
+        .img-icon-r {
+            margin-right: 4px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .status {
+            border-radius: 8px;
+            display: flex;
+            padding: 4px 8px;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+            height: 100%;
+            width: fit-content;
+            line-height: 16px;
+
+            &.paid {
+                background: var(--paleta-estendida-green-green-30, #c0f0d3);
+                color: var(--paleta-estendida-green-green-100, #034d2e);
+            }
+
+            &.analysis {
+                background: var(--paleta-estendida-yellow-yellow-30, #f8f6c2);
+                color: var(--paleta-estendida-yellow-yellow-100, #94621f);
+            }
+
+            &.doc-pending {
+                background: var(--paleta-estendida-violet-violet-30, #dbc7ff);
+                color: var(--paleta-estendida-violet-violet-100, #48316d);
+            }
+
+            &.refused {
+                background: var(--paleta-estendida-red-red-30, #ffcdc6);
+                color: var(--paleta-estendida-red-red-100, #842310);
+            }
+        }
+    }
+
+}

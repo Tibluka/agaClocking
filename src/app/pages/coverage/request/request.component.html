@@ -1,0 +1,48 @@
+<main class="container">
+    <form [formGroup]="requestForm">
+        <div class="inputs">
+            <div class="form-item bordered cotacao"
+                [ngClass]="{'label-active': requestForm.get('cotacao').value || inputFocus['cotacao']}">
+                <input maxlength="19" mask="0*" type="text" formControlName="cotacao" (focus)="onInputFocus('cotacao')"
+                    (blur)="onInputBlur('cotacao')">
+                <label class for="cotacao">Nº da cotação</label>
+                <span class="obs">Utilize o número da Nova Plataforma.</span>
+
+                <img (click)="clearField('cotacao')" *ngIf="requestForm.get('cotacao').value" class="close-input"
+                    src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg" alt="">
+            </div>
+
+            <div class="form-item bordered alteracao"
+                [ngClass]="{'label-active': requestForm.get('alteracao').value || inputFocus['alteracao']}">
+                <input maxlength="4" mask="0*" type="text" formControlName="alteracao" (focus)="onInputFocus('alteracao')"
+                    (blur)="onInputBlur('alteracao')">
+                <label for="alteracao">Nº da alteração</label>
+
+                <img (click)="clearField('alteracao')" *ngIf="requestForm.get('alteracao').value" class="close-input"
+                    src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg" alt="">
+            </div>
+            <div class="form-item bordered oferta"
+                [ngClass]="{'label-active': requestForm.get('oferta').value || inputFocus['oferta']}">
+                <input maxlength="4" mask="0*" type="text" formControlName="oferta" (focus)="onInputFocus('oferta')"
+                    (blur)="onInputBlur('oferta')">
+                <label for="oferta">Nº da oferta</label>
+
+                <img (click)="clearField('oferta')" *ngIf="requestForm.get('oferta').value" class="close-input"
+                    src="https://corretor.portoseguro.com.br/col/static-files/coberturaprovisoria/assets/icons/close-input.svg" alt="">
+            </div>
+            <div class="checkbox">
+                <label for="flexCheckDefault">
+                    <input class="checkbox-lg" (change)="disableField()" type="checkbox" formControlName="semCotacao"
+                        value="true" id="flexCheckDefault" (focus)="onInputFocus('semCotacao')"
+                        (blur)="onInputBlur('semCotacao')">
+                    Não possuo o nº da cotação. </label>
+            </div>
+        </div>
+
+
+        <div class="button" [ngClass]="{'disabled': setButtonDisabled()}">
+            <button (click)="search()" class="primary-btn">Avançar</button>
+        </div>
+    </form>
+
+</main>
