@@ -28,7 +28,7 @@ export class ChooseUserComponent implements OnInit {
       alert('Selecione ao menos um usuário');
       return;
     }
-    this.ngbActiveModal.close(this.selectedUser['_id'].$oid);
+    this.ngbActiveModal.close(this.selectedUser['userId']);
   }
 
   close() {
